@@ -1,0 +1,25 @@
+{
+  "name": "zfeed",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "",
+  "author": "KazariEX",
+  "license": "MIT",
+  "repository": "KazariEX/zfeed",
+  "keywords": [],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown -w",
+    "prepack": "pnpm run build",
+    "test": "vitest"
+  }
+}
