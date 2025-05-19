@@ -6,7 +6,11 @@ export interface Feed {
     id: string;
     link?: string;
     feed?: string;
-    feedLinks?: any;
+    feedLinks?: {
+        atom?: string;
+        json?: string;
+        rss?: string;
+    };
     hub?: string;
 
     language?: string;

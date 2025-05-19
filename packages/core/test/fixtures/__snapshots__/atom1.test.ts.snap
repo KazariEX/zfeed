@@ -4,9 +4,16 @@ exports[`atom1 > snapshot 1`] = `
 "<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Feed Title</title>
+  <subtitle>This is my personnal feed!</subtitle>
   <id>http://example.com/</id>
   <updated>2019-09-30T11:45:14.000Z</updated>
   <generator>https://example.com/generator</generator>
+  <logo>http://example.com/image.png</logo>
+  <icon>http://example.com/image.ico</icon>
+  <rights>Copyright © 2025 KazariEX</rights>
+  <link rel="alternate" href="http://example.com/"></link>
+  <link rel="self" href="http://example.com/feed"></link>
+  <link rel="hub" href="wss://example.com/hub"></link>
   <author>
     <name>KazariEX</name>
     <email>kazariex@example.com</email>
@@ -17,13 +24,6 @@ exports[`atom1 > snapshot 1`] = `
     <email>mimori@example.com</email>
     <uri>https://example.com/mimori</uri>
   </contributor>
-  <link rel="alternate" href="http://example.com/"></link>
-  <link rel="self" href="http://example.com/feed"></link>
-  <link rel="hub" href="wss://example.com/hub"></link>
-  <subtitle>This is my personnal feed!</subtitle>
-  <logo>http://example.com/image.png</logo>
-  <icon>http://example.com/image.ico</icon>
-  <rights>Copyright © 2025 KazariEX</rights>
   <category term="Anime"></category>
   <category term="Novel"></category>
   <entry>

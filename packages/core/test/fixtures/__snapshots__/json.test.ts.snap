@@ -14,22 +14,22 @@ exports[`json > snapshot 1`] = `
     },
     "items": [
         {
-            "id": "https://example.com/hello-world?id=this&that=true",
-            "content_html": "Content of the item.",
-            "url": "https://example.com/hello-world",
             "title": "Hello World",
-            "summary": "This is an article about Hello World.",
-            "image": "https://example.com/hello-world.jpg",
+            "id": "https://example.com/hello-world?id=this&that=true",
+            "url": "https://example.com/hello-world",
             "date_modified": "2019-09-30T11:45:14.000Z",
             "date_published": "2019-07-19T11:45:14.000Z",
-            "author": {
-                "name": "Mimori",
-                "url": "https://example.com/mimori"
-            },
             "tags": [
                 "Category One",
                 "Category Two"
             ],
+            "summary": "This is an article about Hello World.",
+            "content_html": "Content of the item.",
+            "image": "https://example.com/hello-world.jpg",
+            "author": {
+                "name": "Mimori",
+                "url": "https://example.com/mimori"
+            },
             "extension:1": {
                 "about": "just an item extension example",
                 "dummy": "example"

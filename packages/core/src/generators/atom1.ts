@@ -15,24 +15,20 @@ export function generateAtom1(feed: Feed) {
         feed: {
             $xmlns: "http://www.w3.org/2005/Atom",
             title: feed.title,
+            subtitle: feed.description,
             id: feed.id,
             updated: feed.updated ? feed.updated.toISOString() : new Date().toISOString(),
             generator: feed.generator,
+            logo: feed.image,
+            icon: feed.favicon,
+            rights: feed.copyright,
         },
     };
-
-    if (feed.author) {
-        data.feed.author = transformAuthor(feed.author);
-    }
-
-    if (feed.contributors.length) {
-        data.feed.contributor = feed.contributors.map(transformAuthor);
-    }
 
     data.feed.link = [];
 
     // link (rel="alternate")
-    if (feed.link) {
+    if (feed.link !== void 0) {
         data.feed.link.push({
             $rel: "alternate",
             $href: feed.link,
@@ -40,8 +36,8 @@ export function generateAtom1(feed: Feed) {
     }
 
     // link (rel="self")
-    const atomLink = feed.feed || feed.feedLinks?.atom;
-    if (atomLink) {
+    const atomLink = feed.feed ?? feed.feedLinks?.atom;
+    if (atomLink !== void 0) {
         data.feed.link.push({
             $rel: "self",
             $href: atomLink,
@@ -49,28 +45,18 @@ export function generateAtom1(feed: Feed) {
     }
 
     // link (rel="hub")
-    if (feed.hub) {
+    if (feed.hub !== void 0) {
         data.feed.link.push({
             $rel: "hub",
             $href: feed.hub,
         });
     }
 
-    if (feed.description) {
-        data.feed.subtitle = feed.description;
+    if (feed.author !== void 0) {
+        data.feed.author = transformAuthor(feed.author);
     }
 
-    if (feed.image) {
-        data.feed.logo = feed.image;
-    }
-
-    if (feed.favicon) {
-        data.feed.icon = feed.favicon;
-    }
-
-    if (feed.copyright) {
-        data.feed.rights = feed.copyright;
-    }
+    data.feed.contributor = feed.contributors.map(transformAuthor);
 
     data.feed.category = feed.categories.map((category) => ({
         $term: category,
@@ -82,7 +68,7 @@ export function generateAtom1(feed: Feed) {
                 $type: "html",
                 $: item.title,
             },
-            id: item.id || item.link,
+            id: item.id ?? item.link,
             link: [{
                 $href: item.link,
             }],
@@ -93,7 +79,7 @@ export function generateAtom1(feed: Feed) {
             entry.published = item.published.toISOString();
         }
 
-        if (item.description) {
+        if (item.description !== void 0) {
             entry.summary = {
                 $type: "html",
                 $: item.description,
@@ -104,7 +90,7 @@ export function generateAtom1(feed: Feed) {
             entry.category = item.category.map(transformCategory);
         }
 
-        if (item.content) {
+        if (item.content !== void 0) {
             entry.content = {
                 $type: "html",
                 $: item.content,
@@ -119,7 +105,7 @@ export function generateAtom1(feed: Feed) {
             entry.contributor = item.contributor.map(transformAuthor);
         }
 
-        if (item.copyright) {
+        if (item.copyright !== void 0) {
             entry.rights = item.copyright;
         }
 
@@ -127,15 +113,15 @@ export function generateAtom1(feed: Feed) {
             entry.link.push(transformEnclosure(item.enclosure));
         }
 
-        if (item.image) {
+        if (item.image !== void 0) {
             entry.link.push(transformEnclosure(item.image, "image"));
         }
 
-        if (item.audio) {
+        if (item.audio !== void 0) {
             entry.link.push(transformEnclosure(item.audio, "audio"));
         }
 
-        if (item.video) {
+        if (item.video !== void 0) {
             entry.link.push(transformEnclosure(item.video, "video"));
         }
 
