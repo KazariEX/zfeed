@@ -125,8 +125,18 @@ export function generateAtom1(feed: Feed) {
             entry.link.push(transformEnclosure(item.video, "video"));
         }
 
+        if (item.extensions?.length) {
+            for (const { name, objects } of item.extensions) {
+                entry[name] = objects;
+            }
+        }
+
         return entry;
     });
+
+    for (const { name, objects } of feed.extensions) {
+        xml[name] = objects;
+    }
 
     return builder.build(xml);
 }
