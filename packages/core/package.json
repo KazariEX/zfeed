@@ -2,13 +2,18 @@
   "name": "zfeed",
   "type": "module",
   "version": "0.0.0",
-  "description": "",
+  "description": "Morden feed generator for RSS, Atom and JSON",
   "author": "KazariEX",
   "license": "MIT",
   "repository": "KazariEX/zfeed",
-  "keywords": [],
+  "keywords": [
+    "feed",
+    "rss",
+    "atom",
+    "json"
+  ],
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./src/index.ts"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -16,6 +21,11 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "exports": {
+      ".": "./dist/index.js"
+    }
+  },
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown -w",

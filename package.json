@@ -1,16 +1,18 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.8.1",
+  "packageManager": "pnpm@10.11.0",
   "scripts": {
     "build": "pnpm -r build",
     "dev": "pnpm -r --parallel dev",
+    "prepare": "zin link core",
     "release": "bumpp -r --no-push -c \"release: v%s\"",
     "test": "vitest"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
     "@zinkawaii/eslint-config": "catalog:",
+    "@zinkawaii/scripts": "catalog:",
     "@zinkawaii/tsconfig": "catalog:",
     "bumpp": "catalog:",
     "eslint": "catalog:",

@@ -10,7 +10,8 @@ export const feed = createFeed({
     link: "http://example.com/",
     feed: "http://example.com/feed",
     feedLinks: {
-        json: "http://example.com/feed",
+        atom: "http://example.com/atom",
+        json: "http://example.com/json",
     },
     hub: "wss://example.com/hub",
 
