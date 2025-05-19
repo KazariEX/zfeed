@@ -1,5 +1,5 @@
 import { XMLBuilder } from "fast-xml-parser";
-import { createXml } from "./utils";
+import { createNamespaces, createXml } from "./utils";
 import type { Feed } from "../feed";
 import type { Author, Category, Enclosure } from "../types";
 
@@ -13,7 +13,7 @@ export function generateAtom1(feed: Feed) {
 
     const xml = createXml(feed, {
         feed: {
-            $xmlns: "http://www.w3.org/2005/Atom",
+            ...createNamespaces(feed, "http://www.w3.org/2005/Atom"),
             title: feed.title,
             subtitle: feed.description,
             id: feed.id,

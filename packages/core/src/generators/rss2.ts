@@ -1,5 +1,5 @@
 import { XMLBuilder } from "fast-xml-parser";
-import { createXml } from "./utils";
+import { createNamespaces, createXml } from "./utils";
 import type { Feed } from "../feed";
 import type { Category, Enclosure } from "../types";
 
@@ -17,6 +17,7 @@ export function generateRss2(feed: Feed) {
     const xml = createXml(feed, {
         rss: {
             $version: "2.0",
+            ...createNamespaces(feed),
             channel: {
                 title: feed.title,
                 description: feed.description,

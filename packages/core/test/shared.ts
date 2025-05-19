@@ -4,6 +4,10 @@ export const updated = new Date("Mon, 30 Sept 2019 11:45:14 GMT");
 export const published = new Date("Fri, 19 Jul 2019 11:45:14 GMT");
 
 export const feed = createFeed({
+    namespaces: {
+        media: "http://search.yahoo.com/mrss/",
+    },
+
     title: "Feed Title",
     description: "This is my personnal feed!",
     id: "http://example.com/",

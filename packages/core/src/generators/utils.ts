@@ -18,3 +18,17 @@ export function createXml(feed: Feed, defaults: Record<string, any> = {}) {
         ...defaults,
     };
 }
+
+export function createNamespaces(feed: Feed, base?: string) {
+    const namespaces = {
+        $xmlns: base,
+        ...Object.fromEntries(
+            Object.entries(feed.namespaces).map(([key, value]) => [
+                `$xmlns:${key}`,
+                value,
+            ]),
+        ),
+    };
+
+    return namespaces;
+}

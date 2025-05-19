@@ -1,6 +1,16 @@
 import type { Author, Extension, Item } from "./types";
 
 export interface Feed {
+    /**
+     * Declarations
+     */
+    stylesheet?: string;
+
+    /**
+     * Namespaces
+     */
+    namespaces: Record<string, string>;
+
     title: string;
     description?: string;
     id: string;
@@ -15,7 +25,6 @@ export interface Feed {
 
     language?: string;
     generator?: string;
-    stylesheet?: string;
     docs?: string;
     image?: string;
     favicon?: string;
@@ -40,6 +49,7 @@ export interface CreateFeedOptions extends Partial<Feed> {
 
 export function createFeed(options: CreateFeedOptions) {
     const feed: Feed = {
+        namespaces: {},
         items: [],
         categories: [],
         contributors: [],
