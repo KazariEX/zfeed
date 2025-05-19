@@ -1,7 +1,7 @@
 {
   "name": "zfeed",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Morden feed generator for RSS, Atom and JSON",
   "author": "KazariEX",
   "license": "MIT",
