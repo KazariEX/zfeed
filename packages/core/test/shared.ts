@@ -17,6 +17,7 @@ export const feed = createFeed({
 
     language: "en",
     generator: "https://example.com/generator",
+    stylesheet: "http://example.com/stylesheet.xsl",
     image: "http://example.com/image.png",
     favicon: "http://example.com/image.ico",
     copyright: "Copyright © 2025 KazariEX",

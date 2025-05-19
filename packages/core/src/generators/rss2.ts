@@ -1,4 +1,5 @@
 import { XMLBuilder } from "fast-xml-parser";
+import { createXml } from "./utils";
 import type { Feed } from "../feed";
 import type { Category, Enclosure } from "../types";
 
@@ -13,7 +14,7 @@ export function generateRss2(feed: Feed) {
     let isAtom = false;
     let isContent = false;
 
-    const data: any = {
+    const xml = createXml(feed, {
         rss: {
             $version: "2.0",
             channel: {
@@ -26,18 +27,18 @@ export function generateRss2(feed: Feed) {
                 generator: feed.generator,
             },
         },
-    };
+    });
 
     if (feed.language !== void 0) {
-        data.rss.channel.language = feed.language;
+        xml.rss.channel.language = feed.language;
     }
 
     if (feed.ttl !== void 0) {
-        data.rss.channel.ttl = feed.ttl;
+        xml.rss.channel.ttl = feed.ttl;
     }
 
     if (feed.image !== void 0) {
-        data.rss.channel.image = {
+        xml.rss.channel.image = {
             title: feed.title,
             url: feed.image,
             link: feed.link,
@@ -45,13 +46,13 @@ export function generateRss2(feed: Feed) {
     }
 
     if (feed.copyright !== void 0) {
-        data.rss.channel.copyright = feed.copyright;
+        xml.rss.channel.copyright = feed.copyright;
     }
 
     const atomLink = feed.feed ?? feed.feedLinks?.rss;
     if (atomLink !== void 0) {
         isAtom = true;
-        data.rss.channel["atom:link"] = [
+        xml.rss.channel["atom:link"] = [
             {
                 $href: atomLink,
                 $rel: "self",
@@ -62,13 +63,13 @@ export function generateRss2(feed: Feed) {
 
     if (feed.hub !== void 0) {
         isAtom = true;
-        (data.rss.channel["atom:link"] ??= []).push({
+        (xml.rss.channel["atom:link"] ??= []).push({
             $href: feed.hub,
             $rel: "hub",
         });
     }
 
-    data.rss.channel.item = feed.items.map((item) => {
+    xml.rss.channel.item = feed.items.map((item) => {
         const entry: any = {
             title: item.title,
             guid: item.id ?? item.link,
@@ -130,37 +131,37 @@ export function generateRss2(feed: Feed) {
     });
 
     if (isAtom) {
-        data.rss["$xmlns:atom"] = "http://www.w3.org/2005/Atom";
+        xml.rss["$xmlns:atom"] = "http://www.w3.org/2005/Atom";
     }
 
     if (isContent) {
-        data.rss["$xmlns:dc"] = "http://purl.org/dc/elements/1.1/";
-        data.rss["$xmlns:content"] = "http://purl.org/rss/1.0/modules/content/";
+        xml.rss["$xmlns:dc"] = "http://purl.org/dc/elements/1.1/";
+        xml.rss["$xmlns:content"] = "http://purl.org/rss/1.0/modules/content/";
     }
 
     if (feed.podcast) {
-        data.rss["$xmlns:googleplay"] = "http://www.google.com/schemas/play-podcasts/1.0";
-        data.rss["$xmlns:itunes"] = "http://www.itunes.com/dtds/podcast-1.0.dtd";
+        xml.rss["$xmlns:googleplay"] = "http://www.google.com/schemas/play-podcasts/1.0";
+        xml.rss["$xmlns:itunes"] = "http://www.itunes.com/dtds/podcast-1.0.dtd";
 
         if (feed.category !== void 0) {
-            data.rss.channel["googleplay:category"] = feed.category;
-            data.rss.channel["itunes:category"] = feed.category;
+            xml.rss.channel["googleplay:category"] = feed.category;
+            xml.rss.channel["itunes:category"] = feed.category;
         }
 
         if (feed.author?.email !== void 0) {
-            data.rss.channel["googleplay:owner"] = feed.author.email;
-            data.rss.channel["itunes:owner"] = {
+            xml.rss.channel["googleplay:owner"] = feed.author.email;
+            xml.rss.channel["itunes:owner"] = {
                 "itunes:email": feed.author.email,
             };
         }
 
         if (feed.author?.name !== void 0) {
-            data.rss.channel["googleplay:author"] = feed.author.name;
-            data.rss.channel["itunes:author"] = feed.author.name;
+            xml.rss.channel["googleplay:author"] = feed.author.name;
+            xml.rss.channel["itunes:author"] = feed.author.name;
         }
 
         if (feed.image !== void 0) {
-            data.rss.channel["googleplay:image"] = {
+            xml.rss.channel["googleplay:image"] = {
                 $href: feed.image,
             };
         }
@@ -168,11 +169,11 @@ export function generateRss2(feed: Feed) {
 
     if (feed.extensions?.length) {
         for (const { name, objects } of feed.extensions) {
-            data.rss[name] = objects;
+            xml.rss[name] = objects;
         }
     }
 
-    return builder.build(data);
+    return builder.build(xml);
 }
 
 function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image") {

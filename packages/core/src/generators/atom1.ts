@@ -1,4 +1,5 @@
 import { XMLBuilder } from "fast-xml-parser";
+import { createXml } from "./utils";
 import type { Feed } from "../feed";
 import type { Author, Category, Enclosure } from "../types";
 
@@ -10,8 +11,7 @@ export function generateAtom1(feed: Feed) {
         ignoreAttributes: false,
     });
 
-    const data: any = {
-        "?xml": { $version: "1.0", $encoding: "utf-8" },
+    const xml = createXml(feed, {
         feed: {
             $xmlns: "http://www.w3.org/2005/Atom",
             title: feed.title,
@@ -23,13 +23,13 @@ export function generateAtom1(feed: Feed) {
             icon: feed.favicon,
             rights: feed.copyright,
         },
-    };
+    });
 
-    data.feed.link = [];
+    xml.feed.link = [];
 
     // link (rel="alternate")
     if (feed.link !== void 0) {
-        data.feed.link.push({
+        xml.feed.link.push({
             $rel: "alternate",
             $href: feed.link,
         });
@@ -38,7 +38,7 @@ export function generateAtom1(feed: Feed) {
     // link (rel="self")
     const atomLink = feed.feed ?? feed.feedLinks?.atom;
     if (atomLink !== void 0) {
-        data.feed.link.push({
+        xml.feed.link.push({
             $rel: "self",
             $href: atomLink,
         });
@@ -46,23 +46,23 @@ export function generateAtom1(feed: Feed) {
 
     // link (rel="hub")
     if (feed.hub !== void 0) {
-        data.feed.link.push({
+        xml.feed.link.push({
             $rel: "hub",
             $href: feed.hub,
         });
     }
 
     if (feed.author !== void 0) {
-        data.feed.author = transformAuthor(feed.author);
+        xml.feed.author = transformAuthor(feed.author);
     }
 
-    data.feed.contributor = feed.contributors.map(transformAuthor);
+    xml.feed.contributor = feed.contributors.map(transformAuthor);
 
-    data.feed.category = feed.categories.map((category) => ({
+    xml.feed.category = feed.categories.map((category) => ({
         $term: category,
     }));
 
-    data.feed.entry = feed.items.map((item) => {
+    xml.feed.entry = feed.items.map((item) => {
         const entry: any = {
             title: {
                 $type: "html",
@@ -128,7 +128,7 @@ export function generateAtom1(feed: Feed) {
         return entry;
     });
 
-    return builder.build(data);
+    return builder.build(xml);
 }
 
 function transformCategory(category: Category) {

@@ -15,6 +15,7 @@ export interface Feed {
 
     language?: string;
     generator?: string;
+    stylesheet?: string;
     docs?: string;
     image?: string;
     favicon?: string;
