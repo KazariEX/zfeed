@@ -169,7 +169,7 @@ export function generateRss2(feed: Feed) {
     }
 
     for (const { name, objects } of feed.extensions) {
-        xml.rss[name] = objects;
+        xml.rss.channel[name] = objects;
     }
 
     return builder.build(xml);

@@ -77,10 +77,10 @@ exports[`atom1 > snapshot 1`] = `
       <dummy>example</dummy>
     </extension:2>
   </entry>
+  <extension>
+    <about>just an extension example</about>
+    <dummy>example</dummy>
+  </extension>
 </feed>
-<extension>
-  <about>just an extension example</about>
-  <dummy>example</dummy>
-</extension>
 "
 `;
