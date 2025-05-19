@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { generateAtom1 } from "../../src";
-import { feed } from "../shared";
+import { generateAtom1 } from "../src";
+import { feed } from "./shared";
 
 describe("atom1", () => {
     it("snapshot", () => {

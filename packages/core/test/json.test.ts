@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { generateJson } from "../../src";
-import { feed } from "../shared";
+import { generateJson } from "../src";
+import { feed } from "./shared";
 
 describe("json", () => {
     it("snapshot", () => {

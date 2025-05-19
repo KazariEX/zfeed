@@ -5,7 +5,7 @@ import type { Category, Enclosure } from "../types";
 export function generateRss2(feed: Feed) {
     const builder = new XMLBuilder({
         attributeNamePrefix: "$",
-        cdataPropName: "$",
+        cdataPropName: "#cdata",
         format: true,
         ignoreAttributes: false,
     });
@@ -81,7 +81,7 @@ export function generateRss2(feed: Feed) {
         }
 
         if (item.description !== void 0) {
-            entry.description = { $: item.description };
+            entry.description = { "#cdata": item.description };
         }
 
         if (item.category?.length) {
@@ -90,7 +90,7 @@ export function generateRss2(feed: Feed) {
 
         if (item.content !== void 0) {
             isContent = true;
-            entry["content:encoded"] = { $: item.content };
+            entry["content:encoded"] = { "#cdata": item.content };
         }
 
         if (item.author?.length) {

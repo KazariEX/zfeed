@@ -5,7 +5,7 @@ import type { Author, Category, Enclosure } from "../types";
 export function generateAtom1(feed: Feed) {
     const builder = new XMLBuilder({
         attributeNamePrefix: "$",
-        cdataPropName: "$",
+        cdataPropName: "#cdata",
         format: true,
         ignoreAttributes: false,
     });
@@ -66,7 +66,7 @@ export function generateAtom1(feed: Feed) {
         const entry: any = {
             title: {
                 $type: "html",
-                $: item.title,
+                "#cdata": item.title,
             },
             id: item.id ?? item.link,
             link: [{
@@ -82,7 +82,7 @@ export function generateAtom1(feed: Feed) {
         if (item.description !== void 0) {
             entry.summary = {
                 $type: "html",
-                $: item.description,
+                "#cdata": item.description,
             };
         }
 
@@ -93,7 +93,7 @@ export function generateAtom1(feed: Feed) {
         if (item.content !== void 0) {
             entry.content = {
                 $type: "html",
-                $: item.content,
+                "#cdata": item.content,
             };
         }
 
