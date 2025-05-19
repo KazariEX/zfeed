@@ -190,10 +190,10 @@ function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image
     const type = new URL(enclosure.url).pathname.split(".").slice(-1)[0];
     return {
         $url: enclosure.url,
-        $length: 0,
+        $length: enclosure.length ?? 0,
         $type: `${mimeCategory}/${type}`,
         $title: enclosure.title,
-        $duration: enclosure.duration ? transformDuration(enclosure.duration) : void 0,
+        $duration: enclosure.duration && transformDuration(enclosure.duration),
     };
 }
 
