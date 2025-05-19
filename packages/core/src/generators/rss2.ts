@@ -72,7 +72,7 @@ export function generateRss2(feed: Feed) {
     xml.rss.channel.item = feed.items.map((item) => {
         const entry: any = {
             title: item.title,
-            guid: item.id ?? item.link,
+            guid: item.id !== void 0 ? { $isPermaLink: "false", "#text": item.id } : item.link,
             link: item.link,
             pubDate: item.date.toUTCString(),
         };
