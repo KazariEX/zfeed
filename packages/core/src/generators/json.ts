@@ -32,17 +32,17 @@ export function generateJson(feed: Feed) {
             entry.author = transformAuthor(item.author[0]);
         }
 
-        if (item.extensions?.length) {
-            for (const { name, objects } of item.extensions) {
-                entry[name] = objects;
+        if (item.extends) {
+            for (const [key, value] of Object.entries(item.extends)) {
+                entry[key] = value;
             }
         }
 
         return entry;
     });
 
-    for (const { name, objects } of feed.extensions) {
-        data[name] = objects;
+    for (const [key, value] of Object.entries(feed.extends)) {
+        data[key] = value;
     }
 
     return JSON.stringify(data, null, 4);

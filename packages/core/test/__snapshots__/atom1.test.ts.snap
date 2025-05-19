@@ -68,19 +68,19 @@ exports[`atom1 > snapshot 1`] = `
       <email>moriya@example.com</email>
       <uri>https://example.com/moriya</uri>
     </contributor>
-    <extension:1>
-      <about>just an item extension example</about>
+    <extend:1>
+      <about>just an extend item example</about>
       <dummy>example</dummy>
-    </extension:1>
-    <extension:2>
-      <about>just a second item extension example</about>
+    </extend:1>
+    <extend:2>
+      <about>just a second extend item example</about>
       <dummy>example</dummy>
-    </extension:2>
+    </extend:2>
   </entry>
-  <extension>
-    <about>just an extension example</about>
+  <extend>
+    <about>just an extend example</about>
     <dummy>example</dummy>
-  </extension>
+  </extend>
 </feed>
 "
 `;

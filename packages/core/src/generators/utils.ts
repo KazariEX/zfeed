@@ -1,6 +1,6 @@
 import type { Feed } from "../feed";
 
-export function createXml(feed: Feed, defaults: Record<string, any> = {}) {
+export function createRoot(feed: Feed, defaults: Record<string, any> = {}) {
     const xml: Record<string, any> = {
         "?xml": { $version: "1.0", $encoding: "utf-8" },
     };

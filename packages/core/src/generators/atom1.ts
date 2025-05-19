@@ -1,5 +1,5 @@
 import { XMLBuilder } from "fast-xml-parser";
-import { createRootAttributes, createXml } from "./utils";
+import { createRoot, createRootAttributes } from "./utils";
 import type { Feed } from "../feed";
 import type { Author, Category, Enclosure } from "../types";
 
@@ -11,7 +11,7 @@ export function generateAtom1(feed: Feed) {
         ignoreAttributes: false,
     });
 
-    const xml = createXml(feed, {
+    const xml = createRoot(feed, {
         feed: {
             ...createRootAttributes(feed, "http://www.w3.org/2005/Atom"),
             "$xml:lang": feed.language,
@@ -126,17 +126,17 @@ export function generateAtom1(feed: Feed) {
             entry.link.push(transformEnclosure(item.video, "video"));
         }
 
-        if (item.extensions?.length) {
-            for (const { name, objects } of item.extensions) {
-                entry[name] = objects;
+        if (item.extends) {
+            for (const [key, value] of Object.entries(item.extends)) {
+                entry[key] = value;
             }
         }
 
         return entry;
     });
 
-    for (const { name, objects } of feed.extensions) {
-        xml.feed[name] = objects;
+    for (const [key, value] of Object.entries(feed.extends)) {
+        xml.feed[key] = value;
     }
 
     return builder.build(xml);

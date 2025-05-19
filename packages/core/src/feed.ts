@@ -1,4 +1,4 @@
-import type { Author, Extension, Item } from "./types";
+import type { Author, Item } from "./types";
 
 export interface Feed {
     /**
@@ -39,7 +39,7 @@ export interface Feed {
     contributors: Author[];
     categories: string[];
     items: Item[];
-    extensions: Extension[];
+    extends: Record<string, any>;
 }
 
 export interface CreateFeedOptions extends Partial<Feed> {
@@ -53,7 +53,7 @@ export function createFeed(options: CreateFeedOptions) {
         items: [],
         categories: [],
         contributors: [],
-        extensions: [],
+        extends: {},
         ...options,
     };
     return feed;

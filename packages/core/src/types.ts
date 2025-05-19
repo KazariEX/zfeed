@@ -18,7 +18,7 @@ export interface Item {
     audio?: string | Enclosure;
     video?: string | Enclosure;
 
-    extensions?: Extension[];
+    extends?: Record<string, any>;
 }
 
 export interface Category {

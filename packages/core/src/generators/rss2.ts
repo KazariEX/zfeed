@@ -1,5 +1,5 @@
 import { XMLBuilder } from "fast-xml-parser";
-import { createRootAttributes, createXml } from "./utils";
+import { createRoot, createRootAttributes } from "./utils";
 import type { Feed } from "../feed";
 import type { Category, Enclosure } from "../types";
 
@@ -14,7 +14,7 @@ export function generateRss2(feed: Feed) {
     let isAtom = false;
     let isContent = false;
 
-    const xml = createXml(feed, {
+    const xml = createRoot(feed, {
         rss: {
             $version: "2.0",
             ...createRootAttributes(feed),
@@ -122,9 +122,9 @@ export function generateRss2(feed: Feed) {
             entry.enclosure = transformEnclosure(item.video, "video");
         }
 
-        if (item.extensions?.length) {
-            for (const { name, objects } of item.extensions) {
-                entry[name] = objects;
+        if (item.extends) {
+            for (const [key, value] of Object.entries(item.extends)) {
+                entry[key] = value;
             }
         }
 
@@ -168,8 +168,8 @@ export function generateRss2(feed: Feed) {
         }
     }
 
-    for (const { name, objects } of feed.extensions) {
-        xml.rss.channel[name] = objects;
+    for (const [key, value] of Object.entries(feed.extends)) {
+        xml.rss.channel[key] = value;
     }
 
     return builder.build(xml);

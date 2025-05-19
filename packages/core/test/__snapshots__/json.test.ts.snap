@@ -30,18 +30,18 @@ exports[`json > snapshot 1`] = `
                 "name": "Mimori",
                 "url": "https://example.com/mimori"
             },
-            "extension:1": {
-                "about": "just an item extension example",
+            "extend:1": {
+                "about": "just an extend item example",
                 "dummy": "example"
             },
-            "extension:2": {
-                "about": "just a second item extension example",
+            "extend:2": {
+                "about": "just a second extend item example",
                 "dummy": "example"
             }
         }
     ],
-    "extension": {
-        "about": "just an extension example",
+    "extend": {
+        "about": "just an extend example",
         "dummy": "example"
     }
 }"

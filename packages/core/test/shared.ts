@@ -95,32 +95,23 @@ export const feed = createFeed({
                 length: 65535,
                 type: "image/jpeg",
             },
-            extensions: [
-                {
-                    name: "extension:1",
-                    objects: {
-                        about: "just an item extension example",
-                        dummy: "example",
-                    },
+            extends: {
+                "extend:1": {
+                    about: "just an extend item example",
+                    dummy: "example",
                 },
-                {
-                    name: "extension:2",
-                    objects: {
-                        about: "just a second item extension example",
-                        dummy: "example",
-                    },
+                "extend:2": {
+                    about: "just a second extend item example",
+                    dummy: "example",
                 },
-            ],
-        },
-    ],
-
-    extensions: [
-        {
-            name: "extension",
-            objects: {
-                about: "just an extension example",
-                dummy: "example",
             },
         },
     ],
+
+    extends: {
+        extend: {
+            about: "just an extend example",
+            dummy: "example",
+        },
+    },
 });

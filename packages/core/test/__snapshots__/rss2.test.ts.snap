@@ -39,19 +39,19 @@ exports[`rss2 > snapshot 1`] = `
       <author>mimori@example.com (Mimori)</author>
       <author>yamabuki@example.com (Yamabuki)</author>
       <enclosure url="https://example.com/hello-world.jpg" length="0" type="image/jpg"></enclosure>
-      <extension:1>
-        <about>just an item extension example</about>
+      <extend:1>
+        <about>just an extend item example</about>
         <dummy>example</dummy>
-      </extension:1>
-      <extension:2>
-        <about>just a second item extension example</about>
+      </extend:1>
+      <extend:2>
+        <about>just a second extend item example</about>
         <dummy>example</dummy>
-      </extension:2>
+      </extend:2>
     </item>
-    <extension>
-      <about>just an extension example</about>
+    <extend>
+      <about>just an extend example</about>
       <dummy>example</dummy>
-    </extension>
+    </extend>
   </channel>
 </rss>
 "
