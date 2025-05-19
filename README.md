@@ -1,8 +1,8 @@
 # ZFeed
 
-[![version](https://img.shields.io/npm/v/zfeed?color=BE8B90&labelColor=FA565D&label=npm)](https://www.npmjs.com/package/zfeed)
-[![downloads](https://img.shields.io/npm/dm/zfeed?color=BE8B90&labelColor=FA565D&label=downloads)](https://www.npmjs.com/package/zfeed)
-[![license](https://img.shields.io/npm/l/zfeed?color=BE8B90&labelColor=FA565D&label=license)](/LICENSE)
+[![version](https://img.shields.io/npm/v/zfeed?color=white&labelColor=FFA602&label=npm)](https://www.npmjs.com/package/zfeed)
+[![downloads](https://img.shields.io/npm/dm/zfeed?color=white&labelColor=FFA602&label=downloads)](https://www.npmjs.com/package/zfeed)
+[![license](https://img.shields.io/npm/l/zfeed?color=white&labelColor=FFA602&label=license)](/LICENSE)
 
 Morden feed generator for RSS, Atom and JSON which is tiny and tree-shakable. Forked and rewritten from [jpmonette/feed](https://github.com/jpmonette/feed).
 
@@ -29,6 +29,7 @@ export const feed = createFeed({
   },
   language: "en",
   generator: "https://example.com/generator",
+  stylesheet: "http://example.com/style.xsl",
   image: "http://example.com/image.png",
   favicon: "http://example.com/image.ico",
   copyright: "Copyright © 2025 KazariEX",
