@@ -19,7 +19,7 @@ export const feed = createFeed({
     },
     hub: "wss://example.com/hub",
 
-    language: "en",
+    language: "en-US",
     generator: "https://example.com/generator",
     stylesheet: "http://example.com/stylesheet.xsl",
     image: "http://example.com/image.png",

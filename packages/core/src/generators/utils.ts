@@ -19,9 +19,10 @@ export function createXml(feed: Feed, defaults: Record<string, any> = {}) {
     };
 }
 
-export function createNamespaces(feed: Feed, base?: string) {
-    const namespaces = {
-        $xmlns: base,
+export function createRootAttributes(feed: Feed, defaultNamespaceUrl?: string) {
+    const attributes = {
+        "$xml:lang": feed.language,
+        $xmlns: defaultNamespaceUrl,
         ...Object.fromEntries(
             Object.entries(feed.namespaces).map(([key, value]) => [
                 `$xmlns:${key}`,
@@ -30,5 +31,5 @@ export function createNamespaces(feed: Feed, base?: string) {
         ),
     };
 
-    return namespaces;
+    return attributes;
 }

@@ -4,7 +4,7 @@
 [![downloads](https://img.shields.io/npm/dm/zfeed?color=white&labelColor=FFA602&label=downloads)](https://www.npmjs.com/package/zfeed)
 [![license](https://img.shields.io/npm/l/zfeed?color=white&labelColor=FFA602&label=license)](/LICENSE)
 
-Morden feed generator for RSS, Atom and JSON which is tiny and tree-shakable. Forked and rewritten from [jpmonette/feed](https://github.com/jpmonette/feed).
+Morden feed generator for RSS, Atom and JSON, tiny and tree-shakable. Forked and rewritten from [jpmonette/feed](https://github.com/jpmonette/feed).
 
 ## Installation
 
@@ -27,7 +27,7 @@ export const feed = createFeed({
     atom: "http://example.com/atom",
     json: "http://example.com/json",
   },
-  language: "en",
+  language: "en-US",
   generator: "https://example.com/generator",
   stylesheet: "http://example.com/style.xsl",
   image: "http://example.com/image.png",
