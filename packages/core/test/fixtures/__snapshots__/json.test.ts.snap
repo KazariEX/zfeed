@@ -1,0 +1,48 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`json > snapshot 1`] = `
+"{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Feed Title",
+    "home_page_url": "http://example.com/",
+    "feed_url": "http://example.com/feed",
+    "description": "This is my personnal feed!",
+    "icon": "http://example.com/image.png",
+    "author": {
+        "name": "KazariEX",
+        "url": "https://example.com/kazariex"
+    },
+    "items": [
+        {
+            "id": "https://example.com/hello-world?id=this&that=true",
+            "content_html": "Content of the item.",
+            "url": "https://example.com/hello-world",
+            "title": "Hello World",
+            "summary": "This is an article about Hello World.",
+            "image": "https://example.com/hello-world.jpg",
+            "date_modified": "2019-09-30T11:45:14.000Z",
+            "date_published": "2019-07-19T11:45:14.000Z",
+            "author": {
+                "name": "Mimori",
+                "url": "https://example.com/mimori"
+            },
+            "tags": [
+                "Category One",
+                "Category Two"
+            ],
+            "extension:1": {
+                "about": "just an item extension example",
+                "dummy": "example"
+            },
+            "extension:2": {
+                "about": "just a second item extension example",
+                "dummy": "example"
+            }
+        }
+    ],
+    "extension": {
+        "about": "just an extension example",
+        "dummy": "example"
+    }
+}"
+`;
