@@ -136,7 +136,7 @@ export function generateAtom1(feed: Feed) {
     });
 
     for (const { name, objects } of feed.extensions) {
-        xml[name] = objects;
+        xml.feed[name] = objects;
     }
 
     return builder.build(xml);

@@ -168,10 +168,8 @@ export function generateRss2(feed: Feed) {
         }
     }
 
-    if (feed.extensions?.length) {
-        for (const { name, objects } of feed.extensions) {
-            xml.rss[name] = objects;
-        }
+    for (const { name, objects } of feed.extensions) {
+        xml.rss[name] = objects;
     }
 
     return builder.build(xml);
