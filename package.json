@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
     "@zinkawaii/eslint-config": "catalog:",
     "@zinkawaii/scripts": "catalog:",
     "@zinkawaii/tsconfig": "catalog:",

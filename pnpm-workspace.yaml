@@ -5,14 +5,19 @@ packages:
 
 catalog:
   "@antfu/eslint-config": ^4.13.1
+  "@types/js-beautify": ^1.14.3
+  "@vitejs/plugin-vue": ^5.2.4
+  "@vue/server-renderer": ^3.5.14
   "@zinkawaii/eslint-config": ^0.3.0
   "@zinkawaii/scripts": ^0.0.2
   "@zinkawaii/tsconfig": ^0.0.2
   bumpp: ^10.1.1
   eslint: ^9.27.0
   fast-xml-parser: ^5.2.3
+  js-beautify: ^1.15.4
   tsdown: ^0.11.11
   vitest: ^3.1.3
+  vue: ^3.5.14
 
 onlyBuiltDependencies:
   - esbuild

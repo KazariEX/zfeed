@@ -1,0 +1,38 @@
+{
+  "name": "@zfeed/vue",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Renderer for XSL templates with Vue 3",
+  "author": "KazariEX",
+  "license": "MIT",
+  "repository": "KazariEX/zfeed",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "exports": {
+      ".": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown -w",
+    "prepack": "pnpm run build",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@vue/server-renderer": "catalog:",
+    "@zfeed/xsl": "workspace:",
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@types/js-beautify": "catalog:",
+    "js-beautify": "catalog:"
+  }
+}
