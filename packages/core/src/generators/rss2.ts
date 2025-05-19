@@ -11,33 +11,37 @@ export function generateRss2(feed: Feed) {
         ignoreAttributes: false,
     });
 
-    let isAtom = false;
-    let isContent = false;
+    let hasContent = false;
 
     const xml = createRoot(feed, {
         rss: {
             $version: "2.0",
             ...createRootAttributes(feed),
             channel: {
+                /**
+                 * @link https://www.rssboard.org/rss-specification#requiredChannelElements
+                 */
                 title: feed.title,
                 description: feed.description,
                 link: feed.id ?? feed.link,
+
+                /**
+                 * @link https://www.rssboard.org/rss-specification#optionalChannelElements
+                 */
                 lastBuildDate: feed.updated ? feed.updated.toUTCString() : new Date().toUTCString(),
                 category: feed.categories,
                 docs: feed.docs ?? "https://validator.w3.org/feed/docs/rss2.html",
                 generator: feed.generator,
+                language: feed.language,
+                copyright: feed.copyright,
+                ttl: feed.ttl,
             },
         },
     });
 
-    if (feed.language !== void 0) {
-        xml.rss.channel.language = feed.language;
-    }
-
-    if (feed.ttl !== void 0) {
-        xml.rss.channel.ttl = feed.ttl;
-    }
-
+    /**
+     * @link https://www.rssboard.org/rss-specification#ltimagegtSubelementOfLtchannelgt
+     */
     if (feed.image !== void 0) {
         xml.rss.channel.image = {
             title: feed.title,
@@ -46,25 +50,21 @@ export function generateRss2(feed: Feed) {
         };
     }
 
-    if (feed.copyright !== void 0) {
-        xml.rss.channel.copyright = feed.copyright;
-    }
+    const atomLinks: any[] = xml.rss.channel["atom:link"] = [];
 
+    // atom:link (rel="self")
     const atomLink = feed.feed ?? feed.feedLinks?.rss;
     if (atomLink !== void 0) {
-        isAtom = true;
-        xml.rss.channel["atom:link"] = [
-            {
-                $href: atomLink,
-                $rel: "self",
-                $type: "application/rss+xml",
-            },
-        ];
+        atomLinks.push({
+            $href: atomLink,
+            $rel: "self",
+            $type: "application/rss+xml",
+        });
     }
 
+    // atom:link (rel="hub")
     if (feed.hub !== void 0) {
-        isAtom = true;
-        (xml.rss.channel["atom:link"] ??= []).push({
+        atomLinks.push({
             $href: feed.hub,
             $rel: "hub",
         });
@@ -73,34 +73,48 @@ export function generateRss2(feed: Feed) {
     xml.rss.channel.item = feed.items.map((item) => {
         const entry: any = {
             title: item.title,
+            /**
+             * @link https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt
+             */
             guid: item.id !== void 0 ? { $isPermaLink: "false", "#text": item.id } : item.link,
             link: item.link,
-            pubDate: item.date.toUTCString(),
+            /**
+             * @link https://www.rssboard.org/rss-specification#ltpubdategtSubelementOfLtitemgt
+             */
+            pubDate: item.published?.toUTCString() ?? item.date.toUTCString(),
         };
-
-        if (item.published) {
-            entry.pubDate = item.published.toUTCString();
-        }
 
         if (item.description !== void 0) {
             entry.description = { "#cdata": item.description };
         }
 
+        /**
+         * @link https://www.rssboard.org/rss-specification#ltcategorygtSubelementOfLtitemgt
+         */
         if (item.category?.length) {
             entry.category = item.category.map(transformCategory);
         }
 
+        /**
+         * @link https://www.rssboard.org/rss-profile#namespace-elements-content-encoded
+         */
         if (item.content !== void 0) {
-            isContent = true;
+            hasContent = true;
             entry["content:encoded"] = { "#cdata": item.content };
         }
 
+        /**
+         * @link https://www.rssboard.org/rss-specification#ltauthorgtSubelementOfLtitemgt
+         */
         if (item.author?.length) {
             entry.author = item.author
                 .filter(({ email, name }) => email && name)
                 .map(({ email, name }) => `${email} (${name})`);
         }
 
+        /**
+         * @link https://www.rssboard.org/rss-specification#ltenclosuregtSubelementOfLtitemgt
+         */
         if (item.enclosure) {
             entry.enclosure = transformEnclosure(item.enclosure);
         }
@@ -131,11 +145,11 @@ export function generateRss2(feed: Feed) {
         return entry;
     });
 
-    if (isAtom) {
+    if (atomLinks.length) {
         xml.rss["$xmlns:atom"] = "http://www.w3.org/2005/Atom";
     }
 
-    if (isContent) {
+    if (hasContent) {
         xml.rss["$xmlns:dc"] = "http://purl.org/dc/elements/1.1/";
         xml.rss["$xmlns:content"] = "http://purl.org/rss/1.0/modules/content/";
     }

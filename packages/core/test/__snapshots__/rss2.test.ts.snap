@@ -14,13 +14,13 @@ exports[`rss2 > snapshot 1`] = `
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <generator>https://example.com/generator</generator>
     <language>en-US</language>
+    <copyright>Copyright © 2025 KazariEX</copyright>
     <ttl>60</ttl>
     <image>
       <title>Feed Title</title>
       <url>http://example.com/image.png</url>
       <link>http://example.com/</link>
     </image>
-    <copyright>Copyright © 2025 KazariEX</copyright>
     <atom:link href="http://example.com/feed" rel="self" type="application/rss+xml"></atom:link>
     <atom:link href="wss://example.com/hub" rel="hub"></atom:link>
     <item>
