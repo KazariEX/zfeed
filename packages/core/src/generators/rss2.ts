@@ -112,10 +112,7 @@ export function generateRss2(feed: Feed) {
             entry.link = item.link;
         }
 
-        if (item.guid) {
-            entry.guid = item.guid;
-        }
-        else if (item.id) {
+        if (item.id) {
             entry.guid = item.id;
         }
         else if (item.link) {

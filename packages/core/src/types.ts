@@ -1,7 +1,6 @@
 export interface Item {
     title: string;
     id?: string;
-    guid?: string;
     link: string;
     date: Date;
     published?: Date;
