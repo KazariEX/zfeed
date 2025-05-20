@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { generateAtom1 } from "../src";
-import { feed } from "./shared";
+import { feed, format } from "./shared";
 
 describe("atom1", () => {
     it("snapshot", () => {
-        const result = generateAtom1(feed);
+        const result = format(generateAtom1(feed));
         expect(result).toMatchSnapshot();
     });
 });

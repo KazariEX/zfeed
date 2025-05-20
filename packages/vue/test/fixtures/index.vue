@@ -28,8 +28,8 @@
                     <component is="title">
                         <xsl-value-of select="atom:feed/atom:title/"/>
                     </component>
-                    <link rel="stylesheet" href="/assets/atom.css" />
-                    <link rel="icon" href="{atom:feed/atom:icon}" />
+                    <link rel="stylesheet" href="/assets/atom.css"/>
+                    <link rel="icon" href="{atom:feed/atom:icon}"/>
                 </head>
                 <body>
                     <main>
@@ -49,19 +49,19 @@
                 </xsl-if>
                 <article>
                     <h2 class="entry-title">
-                        <xsl-value-of select="atom:title" />
+                        <xsl-value-of select="atom:title"/>
                     </h2>
                     <xsl-if test="atom:summary">
                         <div class="entry-summary">
-                            <xsl-value-of select="atom:summary" />
+                            <xsl-value-of select="atom:summary"/>
                         </div>
                     </xsl-if>
                     <div class="entry-meta">
-                        <xsl-variable name="published-date" select="substring(atom:published, 1, 10)" />
-                        发布于 <xsl-value-of select="$published-date" />
+                        <xsl-variable name="published-date" select="substring(atom:published, 1, 10)"/>
+                        发布于 <xsl-value-of select="$published-date"/>
                         <xsl-if test="atom:updated and atom:updated != atom:published">
                             <xsl-text> • 更新于 </xsl-text>
-                            <xsl-value-of select="substring(atom:updated, 1, 10)" />
+                            <xsl-value-of select="substring(atom:updated, 1, 10)"/>
                         </xsl-if>
                         <xsl-if test="atom:category">
                             <xsl-text> • </xsl-text>

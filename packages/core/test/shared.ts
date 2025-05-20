@@ -1,3 +1,4 @@
+import formatXml from "xml-formatter";
 import { createFeed } from "../src";
 
 export const updatedAt = new Date("Mon, 30 Sept 2019 11:45:14 GMT");
@@ -127,3 +128,9 @@ export const feed = createFeed({
         },
     },
 });
+
+export function format(text: string) {
+    return formatXml(text, {
+        collapseContent: true,
+    });
+}
