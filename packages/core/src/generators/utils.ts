@@ -1,35 +1,35 @@
-import type { Feed } from "../feed";
+import type { Feed } from "../types";
 
 export function createRoot(feed: Feed, defaults: Record<string, any> = {}) {
-    const xml: Record<string, any> = {
+    const decls: Record<string, any> = {
         "?xml": { $version: "1.0", $encoding: "utf-8" },
     };
 
     if (feed.stylesheet !== void 0) {
         const url = new URL(feed.stylesheet, "https://example.com");
-        xml["?xml-stylesheet"] = {
+        decls["?xml-stylesheet"] = {
             $type: `text/${url.pathname.split(".").pop() ?? "css"}`,
             $href: feed.stylesheet,
         };
     }
 
     return {
-        ...xml,
+        ...decls,
         ...defaults,
     };
 }
 
 export function createRootAttributes(feed: Feed, defaultNamespaceUrl?: string) {
-    const attributes = {
+    const attributes: Record<string, any> = {
         "$xml:lang": feed.language,
         $xmlns: defaultNamespaceUrl,
-        ...Object.fromEntries(
-            Object.entries(feed.namespaces).map(([key, value]) => [
-                `$xmlns:${key}`,
-                value,
-            ]),
-        ),
     };
+
+    if (feed.namespaces) {
+        for (const [key, value] of Object.entries(feed.namespaces)) {
+            attributes[`$xmlns:${key}`] = value;
+        }
+    }
 
     return attributes;
 }

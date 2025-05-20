@@ -42,13 +42,30 @@ export const feed = createFeed({
         },
     ],
 
-    categories: ["Anime", "Novel"],
+    categories: [
+        {
+            name: "Category One",
+        },
+        {
+            name: "Category Two",
+            domain: "http://example.com/category",
+        },
+    ],
 
     items: [
         {
             title: "Hello World",
             id: "https://example.com/hello-world?id=this&that=true",
             link: "https://example.com/hello-world",
+            category: [
+                {
+                    name: "Category One",
+                },
+                {
+                    name: "Category Two",
+                    domain: "http://example.com/category",
+                },
+            ],
             description: "This is an article about Hello World.",
             content: "Content of the item.",
             author: [
@@ -76,15 +93,6 @@ export const feed = createFeed({
                     name: "Moriya",
                     email: "moriya@example.com",
                     link: "https://example.com/moriya",
-                },
-            ],
-            category: [
-                {
-                    name: "Category One",
-                },
-                {
-                    name: "Category Two",
-                    domain: "http://example.com/category",
                 },
             ],
             date: updated,

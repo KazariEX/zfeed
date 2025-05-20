@@ -1,3 +1,45 @@
+export interface Feed {
+    /**
+     * Declarations
+     */
+    stylesheet?: string;
+
+    /**
+     * Namespaces
+     */
+    namespaces?: Record<string, string>;
+
+    title: string;
+    description?: string;
+    id: string;
+    link?: string;
+    feed?: string;
+    feedLinks?: {
+        atom?: string;
+        json?: string;
+        rss?: string;
+    };
+    hub?: string;
+
+    language?: string;
+    generator?: string;
+    docs?: string;
+    image?: string;
+    favicon?: string;
+    copyright?: string;
+    updated?: Date;
+    ttl?: number;
+
+    category?: string;
+    podcast?: boolean;
+
+    author?: Author;
+    contributors?: Author[];
+    categories?: Category[];
+    items?: Item[];
+    extends?: Record<string, any>;
+}
+
 export interface Item {
     title: string;
     id?: string;
@@ -5,8 +47,8 @@ export interface Item {
     date: Date;
     published?: Date;
 
-    description?: string;
     category?: Category[];
+    description?: string;
     content?: string;
 
     author?: Author[];

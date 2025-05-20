@@ -1,5 +1,4 @@
-import type { Feed } from "../feed";
-import type { Author } from "../types";
+import type { Author, Feed } from "../types";
 
 export function generateJson(feed: Feed) {
     const data: any = {
@@ -15,7 +14,7 @@ export function generateJson(feed: Feed) {
         data.author = transformAuthor(feed.author);
     }
 
-    data.items = feed.items.map((item) => {
+    data.items = feed.items?.map((item) => {
         const entry: any = {
             title: item.title,
             id: item.id,
@@ -41,8 +40,10 @@ export function generateJson(feed: Feed) {
         return entry;
     });
 
-    for (const [key, value] of Object.entries(feed.extends)) {
-        data[key] = value;
+    if (feed.extends) {
+        for (const [key, value] of Object.entries(feed.extends)) {
+            data[key] = value;
+        }
     }
 
     return JSON.stringify(data, null, 4);

@@ -25,8 +25,8 @@ exports[`atom1 > snapshot 1`] = `
     <email>mimori@example.com</email>
     <uri>https://example.com/mimori</uri>
   </contributor>
-  <category term="Anime"></category>
-  <category term="Novel"></category>
+  <category label="Category One"></category>
+  <category label="Category Two"></category>
   <entry>
     <title type="html">
       <![CDATA[Hello World]]>

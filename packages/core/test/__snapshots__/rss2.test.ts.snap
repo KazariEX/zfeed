@@ -9,8 +9,8 @@ exports[`rss2 > snapshot 1`] = `
     <description>This is my personnal feed!</description>
     <link>http://example.com/</link>
     <lastBuildDate>Mon, 30 Sep 2019 11:45:14 GMT</lastBuildDate>
-    <category>Anime</category>
-    <category>Novel</category>
+    <category>Category One</category>
+    <category domain="http://example.com/category">Category Two</category>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <generator>https://example.com/generator</generator>
     <language>en-US</language>

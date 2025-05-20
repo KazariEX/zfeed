@@ -1,7 +1,6 @@
 import { XMLBuilder } from "fast-xml-parser";
 import { createRoot, createRootAttributes } from "./utils";
-import type { Feed } from "../feed";
-import type { Author, Category, Enclosure } from "../types";
+import type { Author, Category, Enclosure, Feed } from "../types";
 
 export function generateAtom1(feed: Feed) {
     const builder = new XMLBuilder({
@@ -57,13 +56,11 @@ export function generateAtom1(feed: Feed) {
         xml.feed.author = transformAuthor(feed.author);
     }
 
-    xml.feed.contributor = feed.contributors.map(transformAuthor);
+    xml.feed.contributor = feed.contributors?.map(transformAuthor);
 
-    xml.feed.category = feed.categories.map((category) => ({
-        $term: category,
-    }));
+    xml.feed.category = feed.categories?.map(transformCategory);
 
-    xml.feed.entry = feed.items.map((item) => {
+    xml.feed.entry = feed.items?.map((item) => {
         const entry: any = {
             title: {
                 $type: "html",
@@ -135,8 +132,10 @@ export function generateAtom1(feed: Feed) {
         return entry;
     });
 
-    for (const [key, value] of Object.entries(feed.extends)) {
-        xml.feed[key] = value;
+    if (feed.extends) {
+        for (const [key, value] of Object.entries(feed.extends)) {
+            xml.feed[key] = value;
+        }
     }
 
     return builder.build(xml);

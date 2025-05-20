@@ -1,7 +1,6 @@
 import { XMLBuilder } from "fast-xml-parser";
 import { createRoot, createRootAttributes } from "./utils";
-import type { Feed } from "../feed";
-import type { Category, Enclosure } from "../types";
+import type { Category, Enclosure, Feed } from "../types";
 
 export function generateRss2(feed: Feed) {
     const builder = new XMLBuilder({
@@ -29,7 +28,7 @@ export function generateRss2(feed: Feed) {
                  * @link https://www.rssboard.org/rss-specification#optionalChannelElements
                  */
                 lastBuildDate: feed.updated ? feed.updated.toUTCString() : new Date().toUTCString(),
-                category: feed.categories,
+                category: feed.categories?.map(transformCategory),
                 docs: feed.docs ?? "https://validator.w3.org/feed/docs/rss2.html",
                 generator: feed.generator,
                 language: feed.language,
@@ -70,7 +69,7 @@ export function generateRss2(feed: Feed) {
         });
     }
 
-    xml.rss.channel.item = feed.items.map((item) => {
+    xml.rss.channel.item = feed.items?.map((item) => {
         const entry: any = {
             title: item.title,
             /**
@@ -182,8 +181,10 @@ export function generateRss2(feed: Feed) {
         }
     }
 
-    for (const [key, value] of Object.entries(feed.extends)) {
-        xml.rss.channel[key] = value;
+    if (feed.extends) {
+        for (const [key, value] of Object.entries(feed.extends)) {
+            xml.rss.channel[key] = value;
+        }
     }
 
     return builder.build(xml);
