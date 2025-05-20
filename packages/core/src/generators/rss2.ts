@@ -1,15 +1,8 @@
-import { XMLBuilder } from "fast-xml-parser";
+import { serialize } from "../serialize";
 import { createRoot, createRootAttributes, toArray } from "./utils";
 import type { Author, Category, Enclosure, Feed } from "../types";
 
 export function generateRss2(feed: Feed) {
-    const builder = new XMLBuilder({
-        attributeNamePrefix: "$",
-        cdataPropName: "#cdata",
-        format: true,
-        ignoreAttributes: false,
-    });
-
     let hasContent = false;
 
     const xml = createRoot(feed, {
@@ -186,7 +179,7 @@ export function generateRss2(feed: Feed) {
         }
     }
 
-    return builder.build(xml);
+    return serialize("", xml);
 }
 
 function transformAuthor(author: Author) {

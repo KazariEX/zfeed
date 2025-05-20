@@ -1,5 +1,5 @@
-import type { Author, Feed } from "../types";
 import { toArray } from "./utils";
+import type { Author, Feed } from "../types";
 
 export function generateJson(feed: Feed) {
     const data: any = {

@@ -64,6 +64,13 @@ export interface Item {
     extends?: Record<string, any>;
 }
 
+export interface Author {
+    name?: string;
+    email?: string;
+    link?: string;
+    avatar?: string;
+}
+
 export interface Category {
     term: string;
     link?: string;
@@ -76,13 +83,6 @@ export interface Enclosure {
     length?: number;
     title?: string;
     duration?: number;
-}
-
-export interface Author {
-    name?: string;
-    email?: string;
-    link?: string;
-    avatar?: string;
 }
 
 export interface Extension {
