@@ -44,11 +44,13 @@ export const feed = createFeed({
 
     categories: [
         {
-            name: "Category One",
+            term: "foo",
+            label: "Category Foo",
         },
         {
-            name: "Category Two",
-            domain: "http://example.com/category",
+            term: "bar",
+            label: "Category Bar",
+            link: "http://example.com/category",
         },
     ],
 
@@ -57,13 +59,17 @@ export const feed = createFeed({
             title: "Hello World",
             id: "https://example.com/hello-world?id=this&that=true",
             link: "https://example.com/hello-world",
-            category: [
+            date: updated,
+            published,
+            categories: [
                 {
-                    name: "Category One",
+                    term: "foo",
+                    label: "Category Foo",
                 },
                 {
-                    name: "Category Two",
-                    domain: "http://example.com/category",
+                    term: "bar",
+                    label: "Category Bar",
+                    link: "http://example.com/category",
                 },
             ],
             description: "This is an article about Hello World.",
@@ -95,8 +101,6 @@ export const feed = createFeed({
                     link: "https://example.com/moriya",
                 },
             ],
-            date: updated,
-            published,
             image: "https://example.com/hello-world.jpg",
             enclosure: {
                 url: "https://example.com/hello-world.jpg",

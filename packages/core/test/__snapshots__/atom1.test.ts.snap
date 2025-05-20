@@ -25,8 +25,8 @@ exports[`atom1 > snapshot 1`] = `
     <email>mimori@example.com</email>
     <uri>https://example.com/mimori</uri>
   </contributor>
-  <category label="Category One"></category>
-  <category label="Category Two"></category>
+  <category term="foo" label="Category Foo"></category>
+  <category term="bar" label="Category Bar" scheme="http://example.com/category"></category>
   <entry>
     <title type="html">
       <![CDATA[Hello World]]>
@@ -37,11 +37,11 @@ exports[`atom1 > snapshot 1`] = `
     <link rel="enclosure" href="https://example.com/hello-world.jpg" type="image/jpg"></link>
     <updated>2019-09-30T11:45:14.000Z</updated>
     <published>2019-07-19T11:45:14.000Z</published>
+    <category term="foo" label="Category Foo"></category>
+    <category term="bar" label="Category Bar" scheme="http://example.com/category"></category>
     <summary type="html">
       <![CDATA[This is an article about Hello World.]]>
     </summary>
-    <category label="Category One"></category>
-    <category label="Category Two"></category>
     <content type="html">
       <![CDATA[Content of the item.]]>
     </content>

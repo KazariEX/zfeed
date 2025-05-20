@@ -21,7 +21,7 @@ export function generateJson(feed: Feed) {
             url: item.link,
             date_modified: item.date?.toISOString(),
             date_published: item.published?.toISOString(),
-            tags: item.category?.map(({ name }) => name),
+            tags: item.categories?.map(({ label }) => label),
             summary: item.description,
             content_html: item.content ?? item.description,
             image: item.image,

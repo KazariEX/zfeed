@@ -20,8 +20,8 @@ exports[`json > snapshot 1`] = `
             "date_modified": "2019-09-30T11:45:14.000Z",
             "date_published": "2019-07-19T11:45:14.000Z",
             "tags": [
-                "Category One",
-                "Category Two"
+                "Category Foo",
+                "Category Bar"
             ],
             "summary": "This is an article about Hello World.",
             "content_html": "Content of the item.",

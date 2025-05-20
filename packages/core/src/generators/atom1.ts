@@ -71,10 +71,11 @@ export function generateAtom1(feed: Feed) {
                 $href: item.link,
             }],
             updated: item.date.toISOString(),
+            published: item.published?.toISOString(),
         };
 
-        if (item.published) {
-            entry.published = item.published.toISOString();
+        if (item.categories?.length) {
+            entry.category = item.categories.map(transformCategory);
         }
 
         if (item.description !== void 0) {
@@ -82,10 +83,6 @@ export function generateAtom1(feed: Feed) {
                 $type: "html",
                 "#cdata": item.description,
             };
-        }
-
-        if (item.category?.length) {
-            entry.category = item.category.map(transformCategory);
         }
 
         if (item.content !== void 0) {
@@ -141,16 +138,6 @@ export function generateAtom1(feed: Feed) {
     return builder.build(xml);
 }
 
-function transformCategory(category: Category) {
-    const { name, scheme, term } = category;
-
-    return {
-        $label: name,
-        $scheme: scheme,
-        $term: term,
-    };
-}
-
 function transformAuthor(author: Author) {
     const { name, email, link } = author;
 
@@ -158,6 +145,16 @@ function transformAuthor(author: Author) {
         name,
         email,
         uri: link,
+    };
+}
+
+function transformCategory(category: Category) {
+    const { term, label, link } = category;
+
+    return {
+        $term: term,
+        $label: label,
+        $scheme: link,
     };
 }
 

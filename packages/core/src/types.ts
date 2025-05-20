@@ -47,7 +47,7 @@ export interface Item {
     date: Date;
     published?: Date;
 
-    category?: Category[];
+    categories?: Category[];
     description?: string;
     content?: string;
 
@@ -64,10 +64,9 @@ export interface Item {
 }
 
 export interface Category {
-    name?: string;
-    domain?: string;
-    scheme?: string;
-    term?: string;
+    term: string;
+    link?: string;
+    label?: string;
 }
 
 export interface Enclosure {

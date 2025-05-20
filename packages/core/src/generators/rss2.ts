@@ -83,15 +83,15 @@ export function generateRss2(feed: Feed) {
             pubDate: item.published?.toUTCString() ?? item.date.toUTCString(),
         };
 
-        if (item.description !== void 0) {
-            entry.description = { "#cdata": item.description };
-        }
-
         /**
          * @link https://www.rssboard.org/rss-specification#ltcategorygtSubelementOfLtitemgt
          */
-        if (item.category?.length) {
-            entry.category = item.category.map(transformCategory);
+        if (item.categories?.length) {
+            entry.category = item.categories.map(transformCategory);
+        }
+
+        if (item.description !== void 0) {
+            entry.description = { "#cdata": item.description };
         }
 
         /**
@@ -190,6 +190,15 @@ export function generateRss2(feed: Feed) {
     return builder.build(xml);
 }
 
+function transformCategory(category: Category) {
+    const { term, label, link } = category;
+
+    return {
+        $domain: link,
+        "#text": label ?? term,
+    };
+}
+
 function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image") {
     if (typeof enclosure === "string") {
         const type = new URL(enclosure).pathname.split(".").slice(-1)[0];
@@ -207,15 +216,6 @@ function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image
         $type: `${mimeCategory}/${type}`,
         $title: enclosure.title,
         $duration: enclosure.duration && transformDuration(enclosure.duration),
-    };
-}
-
-function transformCategory(category: Category) {
-    const { name, domain } = category;
-
-    return {
-        $domain: domain,
-        "#text": name,
     };
 }
 
