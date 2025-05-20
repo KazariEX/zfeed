@@ -33,3 +33,7 @@ export function createRootAttributes(feed: Feed, defaultNamespaceUrl?: string) {
 
     return attributes;
 }
+
+export function toArray<T>(data: T | T[] | undefined) {
+    return data !== void 0 ? Array.isArray(data) ? data : [data] : [];
+}

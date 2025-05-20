@@ -77,7 +77,7 @@ export const feed = createFeed({
           name: "Yamabuki, Name Only",
         },
       ],
-      contributor: [
+      contributors: [
         {
           name: "Kumoyo",
           email: "kumoyo@example.com",

@@ -1,6 +1,6 @@
 import { XMLBuilder } from "fast-xml-parser";
-import { createRoot, createRootAttributes } from "./utils";
-import type { Category, Enclosure, Feed } from "../types";
+import { createRoot, createRootAttributes, toArray } from "./utils";
+import type { Author, Category, Enclosure, Feed } from "../types";
 
 export function generateRss2(feed: Feed) {
     const builder = new XMLBuilder({
@@ -87,9 +87,7 @@ export function generateRss2(feed: Feed) {
         /**
          * @link https://www.rssboard.org/rss-specification#ltcategorygtSubelementOfLtitemgt
          */
-        if (item.categories?.length) {
-            entry.category = item.categories.map(transformCategory);
-        }
+        entry.category = item.categories?.map(transformCategory);
 
         if (item.description !== void 0) {
             entry.description = { "#cdata": item.description };
@@ -106,11 +104,9 @@ export function generateRss2(feed: Feed) {
         /**
          * @link https://www.rssboard.org/rss-specification#ltauthorgtSubelementOfLtitemgt
          */
-        if (item.author?.length) {
-            entry.author = item.author
-                .filter(({ email, name }) => email && name)
-                .map(({ email, name }) => `${email} (${name})`);
-        }
+        entry.author = toArray(item.author)
+            .filter(({ email }) => email !== void 0)
+            .map(transformAuthor);
 
         /**
          * @link https://www.rssboard.org/rss-specification#ltenclosuregtSubelementOfLtitemgt
@@ -163,16 +159,18 @@ export function generateRss2(feed: Feed) {
             xml.rss.channel["itunes:category"] = feed.category;
         }
 
-        if (feed.author?.email !== void 0) {
-            xml.rss.channel["googleplay:owner"] = feed.author.email;
+        const author = toArray(feed.author)[0];
+
+        if (author?.email !== void 0) {
+            xml.rss.channel["googleplay:owner"] = author.email;
             xml.rss.channel["itunes:owner"] = {
-                "itunes:email": feed.author.email,
+                "itunes:email": author.email,
             };
         }
 
-        if (feed.author?.name !== void 0) {
-            xml.rss.channel["googleplay:author"] = feed.author.name;
-            xml.rss.channel["itunes:author"] = feed.author.name;
+        if (author?.name !== void 0) {
+            xml.rss.channel["googleplay:author"] = author.name;
+            xml.rss.channel["itunes:author"] = author.name;
         }
 
         if (feed.image !== void 0) {
@@ -189,6 +187,11 @@ export function generateRss2(feed: Feed) {
     }
 
     return builder.build(xml);
+}
+
+function transformAuthor(author: Author) {
+    const { name, email } = author;
+    return `${email} (${name})`;
 }
 
 function transformCategory(category: Category) {
