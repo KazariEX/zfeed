@@ -1,7 +1,7 @@
 import { createFeed } from "../src";
 
-export const updated = new Date("Mon, 30 Sept 2019 11:45:14 GMT");
-export const published = new Date("Fri, 19 Jul 2019 11:45:14 GMT");
+export const updatedAt = new Date("Mon, 30 Sept 2019 11:45:14 GMT");
+export const publishedAt = new Date("Fri, 19 Jul 2019 11:45:14 GMT");
 
 export const feed = createFeed({
     namespaces: {
@@ -25,7 +25,7 @@ export const feed = createFeed({
     image: "http://example.com/image.png",
     favicon: "http://example.com/image.ico",
     copyright: "Copyright © 2025 KazariEX",
-    updated,
+    updatedAt: updatedAt,
     ttl: 60,
 
     author: {
@@ -59,8 +59,8 @@ export const feed = createFeed({
             title: "Hello World",
             id: "https://example.com/hello-world?id=this&that=true",
             link: "https://example.com/hello-world",
-            date: updated,
-            published,
+            updatedAt,
+            publishedAt,
             categories: [
                 {
                     term: "foo",

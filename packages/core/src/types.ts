@@ -27,7 +27,8 @@ export interface Feed {
     image?: string;
     favicon?: string;
     copyright?: string;
-    updated?: Date;
+    updatedAt?: Date;
+    publishedAt?: Date;
     ttl?: number;
 
     category?: string;
@@ -44,8 +45,8 @@ export interface Item {
     title: string;
     id?: string;
     link: string;
-    date: Date;
-    published?: Date;
+    updatedAt: Date;
+    publishedAt?: Date;
 
     categories?: Category[];
     description?: string;

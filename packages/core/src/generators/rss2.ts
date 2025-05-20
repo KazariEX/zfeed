@@ -27,7 +27,8 @@ export function generateRss2(feed: Feed) {
                 /**
                  * @link https://www.rssboard.org/rss-specification#optionalChannelElements
                  */
-                lastBuildDate: feed.updated ? feed.updated.toUTCString() : new Date().toUTCString(),
+                pubDate: feed.publishedAt?.toUTCString(),
+                lastBuildDate: feed.updatedAt?.toUTCString() ?? new Date().toUTCString(),
                 category: feed.categories?.map(transformCategory),
                 docs: feed.docs ?? "https://validator.w3.org/feed/docs/rss2.html",
                 generator: feed.generator,
@@ -80,7 +81,7 @@ export function generateRss2(feed: Feed) {
             /**
              * @link https://www.rssboard.org/rss-specification#ltpubdategtSubelementOfLtitemgt
              */
-            pubDate: item.published?.toUTCString() ?? item.date.toUTCString(),
+            pubDate: item.publishedAt?.toUTCString() ?? item.updatedAt.toUTCString(),
         };
 
         /**

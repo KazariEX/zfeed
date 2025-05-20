@@ -33,7 +33,7 @@ export const feed = createFeed({
   image: "http://example.com/image.png",
   favicon: "http://example.com/image.ico",
   copyright: "Copyright © 2025 KazariEX",
-  updated: new Date(2019, 6, 19),
+  updatedAt: new Date(2019, 6, 19),
 
   author: {
     name: "KazariEX",
@@ -49,13 +49,17 @@ export const feed = createFeed({
     },
   ],
 
-  categories: ["Anime", "Novel"],
+  categories: [
+    { term: "Anime" },
+    { term: "Novel" },
+  ],
 
   items: [
     {
       title: "Hello World",
       id: "https://example.com/hello-world?id=this&that=true",
       link: "https://example.com/hello-world",
+      updatedAt: new Date(2019, 6, 19),
       description: "This is an article about Hello World.",
       content: "Content of the item.",
       author: [
@@ -85,7 +89,6 @@ export const feed = createFeed({
           link: "https://example.com/moriya",
         },
       ],
-      date: new Date(2019, 6, 19),
       image: "https://example.com/hello-world.jpg",
     },
   ],

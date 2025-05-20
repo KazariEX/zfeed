@@ -17,7 +17,7 @@ export function generateAtom1(feed: Feed) {
             title: feed.title,
             subtitle: feed.description,
             id: feed.id,
-            updated: feed.updated ? feed.updated.toISOString() : new Date().toISOString(),
+            updated: feed.updatedAt?.toISOString() ?? new Date().toISOString(),
             generator: feed.generator,
             logo: feed.image,
             icon: feed.favicon,
@@ -70,8 +70,8 @@ export function generateAtom1(feed: Feed) {
             link: [{
                 $href: item.link,
             }],
-            updated: item.date.toISOString(),
-            published: item.published?.toISOString(),
+            updated: item.updatedAt.toISOString(),
+            published: item.publishedAt?.toISOString(),
         };
 
         if (item.categories?.length) {
