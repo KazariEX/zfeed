@@ -1,4 +1,5 @@
 import type { Author, Feed } from "../types";
+import { toArray } from "./utils";
 
 export function generateJson(feed: Feed) {
     const data: any = {
@@ -10,8 +11,9 @@ export function generateJson(feed: Feed) {
         icon: feed.image,
     };
 
-    if (feed.author) {
-        data.author = transformAuthor(feed.author);
+    const authors = toArray(feed.author);
+    if (authors.length) {
+        data.author = transformAuthor(authors[0]);
     }
 
     data.items = feed.items?.map((item) => {
@@ -27,8 +29,9 @@ export function generateJson(feed: Feed) {
             image: item.image,
         };
 
-        if (item.author?.length) {
-            entry.author = transformAuthor(item.author[0]);
+        const authors = toArray(item.author);
+        if (authors.length) {
+            entry.author = transformAuthor(authors[0]);
         }
 
         if (item.extends) {

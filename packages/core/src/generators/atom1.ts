@@ -1,5 +1,5 @@
 import { XMLBuilder } from "fast-xml-parser";
-import { createRoot, createRootAttributes } from "./utils";
+import { createRoot, createRootAttributes, toArray } from "./utils";
 import type { Author, Category, Enclosure, Feed } from "../types";
 
 export function generateAtom1(feed: Feed) {
@@ -52,9 +52,7 @@ export function generateAtom1(feed: Feed) {
         });
     }
 
-    if (feed.author !== void 0) {
-        xml.feed.author = transformAuthor(feed.author);
-    }
+    xml.feed.author = toArray(feed.author).map(transformAuthor);
 
     xml.feed.contributor = feed.contributors?.map(transformAuthor);
 
@@ -74,9 +72,7 @@ export function generateAtom1(feed: Feed) {
             published: item.publishedAt?.toISOString(),
         };
 
-        if (item.categories?.length) {
-            entry.category = item.categories.map(transformCategory);
-        }
+        entry.category = item.categories?.map(transformCategory);
 
         if (item.description !== void 0) {
             entry.summary = {
@@ -92,17 +88,11 @@ export function generateAtom1(feed: Feed) {
             };
         }
 
-        if (item.author?.length) {
-            entry.author = item.author.map(transformAuthor);
-        }
+        entry.author = toArray(item.author).map(transformAuthor);
 
-        if (item.contributor?.length) {
-            entry.contributor = item.contributor.map(transformAuthor);
-        }
+        entry.contributor = item.contributors?.map(transformAuthor);
 
-        if (item.copyright !== void 0) {
-            entry.rights = item.copyright;
-        }
+        entry.rights = item.copyright;
 
         if (item.enclosure) {
             entry.link.push(transformEnclosure(item.enclosure));

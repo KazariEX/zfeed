@@ -34,7 +34,7 @@ export interface Feed {
     category?: string;
     podcast?: boolean;
 
-    author?: Author;
+    author?: Author | Author[];
     contributors?: Author[];
     categories?: Category[];
     items?: Item[];
@@ -52,8 +52,8 @@ export interface Item {
     description?: string;
     content?: string;
 
-    author?: Author[];
-    contributor?: Author[];
+    author?: Author | Author[];
+    contributors?: Author[];
     copyright?: string;
 
     enclosure?: Enclosure;
