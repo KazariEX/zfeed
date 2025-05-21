@@ -18,6 +18,7 @@
     "bumpp": "catalog:",
     "eslint": "catalog:",
     "tsdown": "catalog:",
+    "vite-tsconfig-paths": "catalog:",
     "vitest": "catalog:",
     "xml-formatter": "catalog:"
   }
