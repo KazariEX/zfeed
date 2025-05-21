@@ -212,15 +212,6 @@ function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image
         $length: enclosure.length ?? 0,
         $type: `${mimeCategory}/${type}`,
         $title: enclosure.title,
-        $duration: enclosure.duration && transformDuration(enclosure.duration),
+        $duration: enclosure.duration,
     };
-}
-
-function transformDuration(duration: number) {
-    const seconds = duration % 60;
-    const totalMinutes = Math.floor(duration / 60);
-    const minutes = totalMinutes % 60;
-    const hours = Math.floor(totalMinutes / 60);
-    const notHours = ("0" + minutes).slice(-2) + ":" + ("0" + seconds).slice(-2);
-    return hours ? hours + ":" + notHours : notHours;
 }
