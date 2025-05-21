@@ -1,6 +1,7 @@
 import { describe, it } from "vitest";
+import { snapshot } from "#utils";
 import { generateJson } from "../src";
-import { feed, snapshot } from "./shared";
+import { feed } from "./shared";
 
 describe("json", () => {
     it("snapshot", async () => {

@@ -1,6 +1,7 @@
 import { describe, it } from "vitest";
+import { format, snapshot } from "#utils";
 import { generateAtom1 } from "../src";
-import { feed, format, snapshot } from "./shared";
+import { feed } from "./shared";
 
 describe("atom1", () => {
     it("snapshot", async () => {

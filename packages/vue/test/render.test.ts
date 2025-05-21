@@ -1,11 +1,11 @@
-import { html as format } from "js-beautify";
-import { describe, expect, it } from "vitest";
+import { describe, it } from "vitest";
+import { format, snapshot } from "#utils";
 import { render } from "../src";
 import Comp from "./fixtures/index.vue";
 
 describe("render", () => {
     it("snapshot", async () => {
         const text = await render(Comp);
-        expect(format(text)).toMatchSnapshot();
+        await snapshot(format(text), "index", "xsl");
     });
 });

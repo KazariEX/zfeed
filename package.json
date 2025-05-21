@@ -18,6 +18,7 @@
     "bumpp": "catalog:",
     "eslint": "catalog:",
     "tsdown": "catalog:",
-    "vitest": "catalog:"
+    "vitest": "catalog:",
+    "xml-formatter": "catalog:"
   }
 }

@@ -1,0 +1,46 @@
+```xsl
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:atom="http://www.w3.org/2005/Atom">
+  <xsl:output method="html"></xsl:output>
+  <xsl:template match="/">
+    <html lang="{atom:feed/atom:language}">
+      <head>
+        <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>
+              <xsl:value-of select="atom:feed/atom:title/"></xsl:value-of>
+            </title>
+            <link rel="stylesheet" href="/assets/atom.css">
+              <link rel="icon" href="{atom:feed/atom:icon}"></link>
+              <body>
+                <main>
+                  <xsl:apply-templates select="atom:feed/atom:entry"></xsl:apply-templates>
+                </main>
+              </body>
+            </link>
+          </meta>
+          <xsl:template match="atom:entry">
+            <a href="{atom:link/@href}">
+              <xsl:variable name="img-src" select="substring-before(substring-after(substring-after(atom:content, &#39;&lt;img&#39;), &#39;src=&quot;&#39;), &#39;&quot;&#39;)"></xsl:variable>
+              <xsl:if test="$img-src">
+                <img class="entry-image" src="{$img-src}" alt="{atom:title}" loading="lazy"></img>
+                <article>
+                  <h2 class="entry-title">
+                    <xsl:value-of select="atom:title"></xsl:value-of>
+                  </h2>
+                  <xsl:if test="atom:summary">
+                    <div class="entry-summary">
+                      <xsl:value-of select="atom:summary"></xsl:value-of>
+                    </div>
+                  </xsl:if>
+                  <div class="entry-meta"><xsl:variable name="published-date" select="substring(atom:published, 1, 10)"></xsl:variable> 发布于 <xsl:value-of select="$published-date"></xsl:value-of><xsl:if test="atom:updated and atom:updated != atom:published"><xsl:text> • 更新于 </xsl:text><xsl:value-of select="substring(atom:updated, 1, 10)"></xsl:value-of></xsl:if><xsl:if test="atom:category"><xsl:text> • </xsl:text><xsl:for-each select="atom:category"><xsl:value-of select="@term"></xsl:value-of></xsl:for-each></xsl:if></div>
+                </article>
+              </xsl:if>
+            </a>
+          </xsl:template>
+        </meta>
+      </head>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
+```

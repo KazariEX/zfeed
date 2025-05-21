@@ -30,9 +30,5 @@
     "@vue/server-renderer": "catalog:",
     "@zfeed/xsl": "workspace:",
     "vue": "catalog:"
-  },
-  "devDependencies": {
-    "@types/js-beautify": "catalog:",
-    "js-beautify": "catalog:"
   }
 }

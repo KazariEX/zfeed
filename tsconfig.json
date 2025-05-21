@@ -1,6 +1,14 @@
 {
   "extends": "@zinkawaii/tsconfig",
+  "compilerOptions": {
+    "paths": {
+      "#utils": [
+        "./utils"
+      ]
+    }
+  },
   "include": [
-    "packages/**/*.ts"
+    "packages/**/*.ts",
+    "utils/**/*.ts"
   ]
 }
