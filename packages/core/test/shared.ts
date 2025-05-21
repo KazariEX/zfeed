@@ -20,12 +20,17 @@ export const feed = createFeed({
     hub: "wss://example.com/hub",
 
     language: "en-US",
-    generator: "https://example.com/generator",
+    generator: {
+        uri: "https://example.com/generator",
+        version: "2.3.3",
+        text: "Generator",
+    },
     stylesheet: "http://example.com/stylesheet.xsl",
     image: "http://example.com/image.png",
     favicon: "http://example.com/image.ico",
     copyright: "Copyright © 2025 KazariEX",
-    updatedAt: updatedAt,
+    updatedAt,
+    publishedAt,
     ttl: 60,
 
     author: {

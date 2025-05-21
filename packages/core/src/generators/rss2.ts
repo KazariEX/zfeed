@@ -1,6 +1,7 @@
+import { defaults } from "../feed";
 import { serialize } from "../serialize";
 import { createRoot, createRootAttributes, toArray } from "./utils";
-import type { Author, Category, Enclosure, Feed } from "../types";
+import type { Author, Category, Enclosure, Feed, Generator } from "../types";
 
 export function generateRss2(feed: Feed) {
     let hasContent = false;
@@ -24,7 +25,7 @@ export function generateRss2(feed: Feed) {
                 lastBuildDate: feed.updatedAt?.toUTCString() ?? new Date().toUTCString(),
                 category: feed.categories?.map(transformCategory),
                 docs: feed.docs ?? "https://validator.w3.org/feed/docs/rss2.html",
-                generator: feed.generator,
+                generator: feed.generator && transformGenerator(feed.generator),
                 language: feed.language,
                 copyright: feed.copyright,
                 ttl: feed.ttl,
@@ -196,6 +197,16 @@ function transformCategory(category: Category) {
         $domain: link,
         "#text": label ?? term,
     };
+}
+
+function transformGenerator(generator: string | true | Generator) {
+    if (typeof generator === "string") {
+        return generator;
+    }
+    else if (generator === true) {
+        generator = defaults.generator;
+    }
+    return generator.uri;
 }
 
 function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image") {

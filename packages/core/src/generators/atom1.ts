@@ -1,6 +1,7 @@
+import { defaults } from "../feed";
 import { serialize } from "../serialize";
 import { createRoot, createRootAttributes, toArray } from "./utils";
-import type { Author, Category, Enclosure, Feed } from "../types";
+import type { Author, Category, Enclosure, Feed, Generator } from "../types";
 
 export function generateAtom1(feed: Feed) {
     const xml = createRoot(feed, {
@@ -11,7 +12,7 @@ export function generateAtom1(feed: Feed) {
             subtitle: feed.description,
             id: feed.id,
             updated: feed.updatedAt?.toISOString() ?? new Date().toISOString(),
-            generator: feed.generator,
+            generator: feed.generator && transformGenerator(feed.generator),
             logo: feed.image,
             icon: feed.favicon,
             rights: feed.copyright,
@@ -119,6 +120,22 @@ export function generateAtom1(feed: Feed) {
     }
 
     return serialize("", xml);
+}
+
+function transformGenerator(generator: string | true | Generator) {
+    if (typeof generator === "string") {
+        return generator;
+    }
+    else if (generator === true) {
+        generator = defaults.generator;
+    }
+
+    const { version, uri, text } = generator;
+    return {
+        $uri: uri,
+        $version: version,
+        "#text": text,
+    };
 }
 
 function transformAuthor(author: Author) {

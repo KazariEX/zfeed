@@ -6,6 +6,7 @@
     <title>Feed Title</title>
     <description>This is my personnal feed!</description>
     <link>http://example.com/</link>
+    <pubDate>Fri, 19 Jul 2019 11:45:14 GMT</pubDate>
     <lastBuildDate>Mon, 30 Sep 2019 11:45:14 GMT</lastBuildDate>
     <category>Category Foo</category>
     <category domain="http://example.com/category">Category Bar</category>

@@ -33,9 +33,10 @@ export const feed = createFeed({
   generator: "https://example.com/generator",
   stylesheet: "http://example.com/style.xsl",
   image: "http://example.com/image.png",
-  favicon: "http://example.com/image.ico",
+  favicon: "http://example.com/favicon.ico",
   copyright: "Copyright © 2025 KazariEX",
   updatedAt: new Date(2019, 6, 19),
+  publishedAt: new Date(2019, 8, 30),
 
   author: {
     name: "KazariEX",
@@ -99,7 +100,7 @@ export const feed = createFeed({
 // Atom 1.0
 const atom1 = generateAtom1(feed);
 
-// JSON Feed 1.0
+// JSON Feed 1.1
 const json = generateJson(feed);
 
 // RSS 2.0

@@ -6,7 +6,7 @@
   <subtitle>This is my personnal feed!</subtitle>
   <id>http://example.com/</id>
   <updated>2019-09-30T11:45:14.000Z</updated>
-  <generator>https://example.com/generator</generator>
+  <generator uri="https://example.com/generator" version="2.3.3">Generator</generator>
   <logo>http://example.com/image.png</logo>
   <icon>http://example.com/image.ico</icon>
   <rights>Copyright © 2025 KazariEX</rights>

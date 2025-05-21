@@ -22,7 +22,7 @@ export interface Feed {
     hub?: string;
 
     language?: string;
-    generator?: string;
+    generator?: string | true | Generator;
     docs?: string;
     image?: string;
     favicon?: string;
@@ -63,6 +63,12 @@ export interface Item {
     extends?: Record<string, any>;
 }
 
+export interface Generator {
+    uri?: string;
+    version?: string;
+    text: string;
+}
+
 export interface Author {
     name?: string;
     email?: string;
@@ -82,9 +88,4 @@ export interface Enclosure {
     length?: number;
     title?: string;
     duration?: number;
-}
-
-export interface Extension {
-  name: string;
-  objects: any;
 }
