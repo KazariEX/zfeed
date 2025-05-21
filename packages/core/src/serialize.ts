@@ -8,8 +8,7 @@ export function serialize(name: string, val: unknown): string {
 
     let stuff = "";
     let content = "";
-    let text = false;
-    let cdata = false;
+    let raw = false;
 
     if (typeof val === "object") {
         for (const [key, value] of Object.entries(val)) {
@@ -21,23 +20,19 @@ export function serialize(name: string, val: unknown): string {
             }
             else if (key === "#text") {
                 content = escape(String(value));
-                text = true;
+                raw = true;
             }
             else if (key === "#cdata") {
                 content = `<![CDATA[${value}]]>`;
-                cdata = true;
+                raw = true;
             }
-            else if (!text && !cdata) {
+            else if (!raw) {
                 content += serialize(key, value);
             }
         }
     }
     else {
         content = escape(String(val));
-    }
-
-    if (name.startsWith("?")) {
-        return `<?${name.slice(1)}${stuff}?>`;
     }
 
     return name
