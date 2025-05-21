@@ -143,7 +143,7 @@ function transformCategory(category: Category) {
 
 function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image") {
     if (typeof enclosure === "string") {
-        const type = new URL(enclosure).pathname.split(".").slice(-1)[0];
+        const type = new URL(enclosure).pathname.split(".").pop();
         return {
             $rel: "enclosure",
             $href: enclosure,
@@ -151,7 +151,7 @@ function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image
         };
     }
 
-    const type = new URL(enclosure.url).pathname.split(".").slice(-1)[0];
+    const type = new URL(enclosure.url).pathname.split(".").pop();
     return {
         $rel: "enclosure",
         $href: enclosure.url,

@@ -1,37 +1,48 @@
 import { toArray } from "./utils";
-import type { Author, Feed } from "../types";
+import type { Author, Enclosure, Feed } from "../types";
 
 export function generateJson(feed: Feed) {
     const data: any = {
-        version: "https://jsonfeed.org/version/1",
+        version: "https://jsonfeed.org/version/1.1",
         title: feed.title,
         home_page_url: feed.link,
         feed_url: feed.feed ?? feed.feedLinks?.json,
         description: feed.description,
         icon: feed.image,
+        favicon: feed.favicon,
+        authors: toArray(feed.author).map(transformAuthor),
+        language: feed.language,
     };
-
-    const authors = toArray(feed.author);
-    if (authors.length) {
-        data.author = transformAuthor(authors[0]);
-    }
 
     data.items = feed.items?.map((item) => {
         const entry: any = {
-            title: item.title,
             id: item.id,
             url: item.link,
-            date_modified: item.updatedAt?.toISOString(),
-            date_published: item.publishedAt?.toISOString(),
-            tags: item.categories?.map(({ label }) => label),
-            summary: item.description,
+            title: item.title,
             content_html: item.content ?? item.description,
+            summary: item.description,
             image: item.image,
+            date_published: item.publishedAt?.toISOString(),
+            date_modified: item.updatedAt?.toISOString(),
+            authors: toArray(item.author).map(transformAuthor),
+            tags: item.categories?.map(({ label }) => label),
+            attachments: [],
         };
 
-        const authors = toArray(item.author);
-        if (authors.length) {
-            entry.author = transformAuthor(authors[0]);
+        if (item.enclosure) {
+            entry.attachments.push(transformEnclosure(item.enclosure));
+        }
+
+        if (item.image !== void 0) {
+            entry.attachments.push(transformEnclosure(item.image, "image"));
+        }
+
+        if (item.audio !== void 0) {
+            entry.attachments.push(transformEnclosure(item.audio, "audio"));
+        }
+
+        if (item.video !== void 0) {
+            entry.attachments.push(transformEnclosure(item.video, "video"));
         }
 
         if (item.extends) {
@@ -59,5 +70,24 @@ function transformAuthor(author: Author) {
         name,
         url: link,
         avatar,
+    };
+}
+
+function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image") {
+    if (typeof enclosure === "string") {
+        const type = new URL(enclosure).pathname.split(".").pop();
+        return {
+            url: enclosure,
+            mime_type: `${mimeCategory}/${type}`,
+        };
+    }
+
+    const type = new URL(enclosure.url).pathname.split(".").pop();
+    return {
+        url: enclosure.url,
+        mime_type: `${mimeCategory}/${type}`,
+        title: enclosure.title,
+        size_in_bytes: enclosure.length,
+        duration_in_seconds: enclosure.duration,
     };
 }

@@ -101,12 +101,12 @@ export const feed = createFeed({
                     link: "https://example.com/moriya",
                 },
             ],
-            image: "https://example.com/hello-world.jpg",
             enclosure: {
                 url: "https://example.com/hello-world.jpg",
                 length: 65535,
                 type: "image/jpeg",
             },
+            image: "https://example.com/hello-world.jpg",
             extends: {
                 "extend:1": {
                     about: "just an extend item example",
