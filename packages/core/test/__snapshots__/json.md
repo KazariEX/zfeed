@@ -1,0 +1,46 @@
+```json
+{
+  "version": "https://jsonfeed.org/version/1",
+  "title": "Feed Title",
+  "home_page_url": "http://example.com/",
+  "feed_url": "http://example.com/feed",
+  "description": "This is my personnal feed!",
+  "icon": "http://example.com/image.png",
+  "author": {
+    "name": "KazariEX",
+    "url": "https://example.com/kazariex"
+  },
+  "items": [
+    {
+      "title": "Hello World",
+      "id": "https://example.com/hello-world?id=this&that=true",
+      "url": "https://example.com/hello-world",
+      "date_modified": "2019-09-30T11:45:14.000Z",
+      "date_published": "2019-07-19T11:45:14.000Z",
+      "tags": [
+        "Category Foo",
+        "Category Bar"
+      ],
+      "summary": "This is an article about Hello World.",
+      "content_html": "Content of the item.",
+      "image": "https://example.com/hello-world.jpg",
+      "author": {
+        "name": "Mimori",
+        "url": "https://example.com/mimori"
+      },
+      "extend:1": {
+        "about": "just an extend item example",
+        "dummy": "example"
+      },
+      "extend:2": {
+        "about": "just a second extend item example",
+        "dummy": "example"
+      }
+    }
+  ],
+  "extend": {
+    "about": "just an extend example",
+    "dummy": "example"
+  }
+}
+```

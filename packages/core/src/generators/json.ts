@@ -49,7 +49,7 @@ export function generateJson(feed: Feed) {
         }
     }
 
-    return JSON.stringify(data, null, 4);
+    return JSON.stringify(data, null, 2);
 }
 
 function transformAuthor(author: Author) {

@@ -1,10 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, it } from "vitest";
 import { generateRss2 } from "../src";
-import { feed, format } from "./shared";
+import { feed, format, snapshot } from "./shared";
 
 describe("rss2", () => {
-    it("snapshot", () => {
+    it("snapshot", async () => {
         const result = format(generateRss2(feed));
-        expect(result).toMatchSnapshot();
+        await snapshot(result, "rss2", "xml");
     });
 });

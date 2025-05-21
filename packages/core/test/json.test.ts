@@ -1,10 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, it } from "vitest";
 import { generateJson } from "../src";
-import { feed } from "./shared";
+import { feed, snapshot } from "./shared";
 
 describe("json", () => {
-    it("snapshot", () => {
+    it("snapshot", async () => {
         const result = generateJson(feed);
-        expect(result).toMatchSnapshot();
+        await snapshot(result, "json", "json");
     });
 });
