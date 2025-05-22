@@ -31,5 +31,8 @@
     "dev": "tsdown -w",
     "prepack": "pnpm run build",
     "test": "vitest"
+  },
+  "devDependencies": {
+    "xml-formatter": "catalog:"
   }
 }

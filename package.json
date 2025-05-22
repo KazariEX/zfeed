@@ -11,15 +11,12 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
-    "@vitejs/plugin-vue": "catalog:",
     "@zinkawaii/eslint-config": "catalog:",
     "@zinkawaii/scripts": "catalog:",
     "@zinkawaii/tsconfig": "catalog:",
     "bumpp": "catalog:",
     "eslint": "catalog:",
     "tsdown": "catalog:",
-    "vite-tsconfig-paths": "catalog:",
-    "vitest": "catalog:",
-    "xml-formatter": "catalog:"
+    "vitest": "catalog:"
   }
 }

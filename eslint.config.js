@@ -7,7 +7,6 @@ export default antfu({
         ...zin.standard,
         ...zin.recommended,
         ...zin.stylistic,
-        ...zin.vue,
         ...zin.patch,
     },
 });
