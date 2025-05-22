@@ -140,7 +140,6 @@ export function generateRss2(feed: Feed) {
     }
 
     if (hasContent) {
-        xml.rss["$xmlns:dc"] = "http://purl.org/dc/elements/1.1/";
         xml.rss["$xmlns:content"] = "http://purl.org/rss/1.0/modules/content/";
     }
 
