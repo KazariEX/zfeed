@@ -57,10 +57,7 @@ export function generateAtom1(feed: Feed) {
 
     xml.feed.entry = feed.items?.map((item) => {
         const entry: any = {
-            title: {
-                $type: "html",
-                "#cdata": item.title,
-            },
+            title: item.title,
             id: item.id ?? item.link,
             link: [{
                 $rel: "alternate",

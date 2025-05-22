@@ -26,7 +26,7 @@
   <category term="foo" label="Category Foo"/>
   <category term="bar" label="Category Bar" scheme="http://example.com/category"/>
   <entry>
-    <title type="html"><![CDATA[Hello World]]></title>
+    <title>Hello World</title>
     <id>https://example.com/hello-world?id=this&amp;that=true</id>
     <link rel="alternate" href="https://example.com/hello-world"/>
     <link rel="enclosure" href="https://example.com/hello-world.jpg" type="image/jpeg" length="65535"/>
