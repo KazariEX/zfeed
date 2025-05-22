@@ -16,7 +16,7 @@ export function generateRss2(feed: Feed) {
                  */
                 title: feed.title,
                 description: feed.description,
-                link: feed.id ?? feed.link,
+                link: feed.link ?? feed.id,
 
                 /**
                  * @link https://www.rssboard.org/rss-specification#optionalChannelElements
@@ -183,20 +183,15 @@ function transformGenerator(generator: string | true | Generator) {
 
 function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image") {
     if (typeof enclosure === "string") {
-        const type = new URL(enclosure).pathname.split(".").pop();
-        return {
-            $url: enclosure,
-            $length: 0,
-            $type: `${mimeCategory}/${type}`,
-        };
+        enclosure = { url: enclosure };
     }
 
-    const type = new URL(enclosure.url).pathname.split(".").pop();
+    const { url, length, type, title, duration } = enclosure;
     return {
-        $url: enclosure.url,
-        $length: enclosure.length ?? 0,
-        $type: `${mimeCategory}/${type}`,
-        $title: enclosure.title,
-        $duration: enclosure.duration,
+        $url: url,
+        $length: length ?? 0,
+        $type: type ?? `${mimeCategory}/${new URL(url).pathname.split(".").pop()}`,
+        $title: title,
+        $duration: duration,
     };
 }

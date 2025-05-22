@@ -79,19 +79,15 @@ function transformAuthor(author: Author) {
 
 function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image") {
     if (typeof enclosure === "string") {
-        const type = new URL(enclosure).pathname.split(".").pop();
-        return {
-            url: enclosure,
-            mime_type: `${mimeCategory}/${type}`,
-        };
+        enclosure = { url: enclosure };
     }
 
-    const type = new URL(enclosure.url).pathname.split(".").pop();
+    const { url, type, title, length, duration } = enclosure;
     return {
-        url: enclosure.url,
-        mime_type: `${mimeCategory}/${type}`,
-        title: enclosure.title,
-        size_in_bytes: enclosure.length,
-        duration_in_seconds: enclosure.duration,
+        url,
+        mime_type: type ?? `${mimeCategory}/${new URL(url).pathname.split(".").pop()}`,
+        title,
+        size_in_bytes: length,
+        duration_in_seconds: duration,
     };
 }

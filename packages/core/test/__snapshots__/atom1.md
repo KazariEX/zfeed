@@ -29,7 +29,7 @@
     <title type="html"><![CDATA[Hello World]]></title>
     <id>https://example.com/hello-world?id=this&amp;that=true</id>
     <link href="https://example.com/hello-world"/>
-    <link rel="enclosure" href="https://example.com/hello-world.jpg" type="image/jpg" length="65535"/>
+    <link rel="enclosure" href="https://example.com/hello-world.jpg" type="image/jpeg" length="65535"/>
     <link rel="enclosure" href="https://example.com/hello-world.jpg" type="image/jpg"/>
     <updated>2019-09-30T11:45:14.000Z</updated>
     <published>2019-07-19T11:45:14.000Z</published>

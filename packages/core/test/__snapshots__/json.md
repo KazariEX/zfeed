@@ -44,7 +44,7 @@
       "attachments": [
         {
           "url": "https://example.com/hello-world.jpg",
-          "mime_type": "image/jpg",
+          "mime_type": "image/jpeg",
           "size_in_bytes": 65535
         },
         {

@@ -126,22 +126,6 @@ export function generateAtom1(feed: Feed) {
     return serialize("", xml);
 }
 
-function transformGenerator(generator: string | true | Generator) {
-    if (typeof generator === "string") {
-        return generator;
-    }
-    else if (generator === true) {
-        generator = defaults.generator;
-    }
-
-    const { version, uri, text } = generator;
-    return {
-        $uri: uri,
-        $version: version,
-        "#text": text,
-    };
-}
-
 function transformAuthor(author: Author) {
     const { name, email, link } = author;
 
@@ -162,22 +146,33 @@ function transformCategory(category: Category) {
     };
 }
 
-function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image") {
-    if (typeof enclosure === "string") {
-        const type = new URL(enclosure).pathname.split(".").pop();
-        return {
-            $rel: "enclosure",
-            $href: enclosure,
-            $type: `${mimeCategory}/${type}`,
-        };
+function transformGenerator(generator: string | true | Generator) {
+    if (typeof generator === "string") {
+        return generator;
+    }
+    else if (generator === true) {
+        generator = defaults.generator;
     }
 
-    const type = new URL(enclosure.url).pathname.split(".").pop();
+    const { uri, version, text } = generator;
+    return {
+        $uri: uri,
+        $version: version,
+        "#text": text,
+    };
+}
+
+function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image") {
+    if (typeof enclosure === "string") {
+        enclosure = { url: enclosure };
+    }
+
+    const { url, type, title, length } = enclosure;
     return {
         $rel: "enclosure",
-        $href: enclosure.url,
-        $title: enclosure.title,
-        $type: `${mimeCategory}/${type}`,
-        $length: enclosure.length,
+        $href: url,
+        $type: type ?? `${mimeCategory}/${new URL(url).pathname.split(".").pop()}`,
+        $title: title,
+        $length: length,
     };
 }
