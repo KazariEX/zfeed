@@ -47,11 +47,11 @@ export function generateRss2(feed: Feed) {
     const atomLinks: any[] = xml.rss.channel["atom:link"] = [];
 
     // atom:link (rel="self")
-    const atomLink = getFeedLink(feed, "rss");
-    if (atomLink !== void 0) {
+    const feedLink = getFeedLink(feed, "rss");
+    if (feedLink !== void 0) {
         atomLinks.push({
-            $href: atomLink,
             $rel: "self",
+            $href: feedLink,
             $type: "application/rss+xml",
         });
     }
@@ -59,8 +59,8 @@ export function generateRss2(feed: Feed) {
     // atom:link (rel="hub")
     if (feed.hub !== void 0) {
         atomLinks.push({
-            $href: feed.hub,
             $rel: "hub",
+            $href: feed.hub,
         });
     }
 

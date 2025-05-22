@@ -30,11 +30,12 @@ export function generateAtom1(feed: Feed) {
     }
 
     // link (rel="self")
-    const atomLink = getFeedLink(feed, "atom");
-    if (atomLink !== void 0) {
+    const feedLink = getFeedLink(feed, "atom");
+    if (feedLink !== void 0) {
         xml.feed.link.push({
             $rel: "self",
-            $href: atomLink,
+            $href: feedLink,
+            $type: "application/atom+xml",
         });
     }
 
