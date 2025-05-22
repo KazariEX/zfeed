@@ -115,11 +115,6 @@ export function generateRss2(feed: Feed) {
 
         if (item.audio !== void 0) {
             entry.enclosure = transformEnclosure(item.audio, "audio");
-
-            if (entry.enclosure.$duration !== void 0) {
-                entry["itunes:duration"] = entry.enclosure.$duration;
-                delete entry.enclosure.$duration;
-            }
         }
 
         if (item.video !== void 0) {
@@ -185,12 +180,10 @@ function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image
         enclosure = { url: enclosure };
     }
 
-    const { url, length, type, title, duration } = enclosure;
+    const { url, length, type } = enclosure;
     return {
         $url: url,
         $length: length ?? 0,
         $type: type ?? `${mimeCategory}/${new URL(url).pathname.split(".").pop()}`,
-        $title: title,
-        $duration: duration,
     };
 }

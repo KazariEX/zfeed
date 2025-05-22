@@ -86,7 +86,6 @@ export interface Enclosure {
     type?: string;
     length?: number;
     title?: string;
-    duration?: number;
 }
 
 export interface Plugin<T> {
