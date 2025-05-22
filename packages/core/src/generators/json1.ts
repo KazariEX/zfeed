@@ -1,8 +1,8 @@
 import { getFeedLink, toArray } from "./utils";
 import type { Author, Enclosure, Feed } from "../types";
 
-export function generateJson(feed: Feed) {
-    const plugins = feed.plugins?.filter(({ type }) => type === "json") ?? [];
+export function generateJson1(feed: Feed) {
+    const plugins = feed.plugins?.filter(({ type }) => type === "json1") ?? [];
 
     const data: any = {
         version: "https://jsonfeed.org/version/1.1",

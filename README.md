@@ -17,7 +17,7 @@ pnpm i zfeed
 ## Usage
 
 ```ts
-import { createFeed, generateAtom1, generateJson, generateRss2 } from "zfeed";
+import { createFeed, generateAtom1, generateJson1, generateRss2 } from "zfeed";
 
 export const feed = createFeed({
   title: "Feed Title",
@@ -101,7 +101,7 @@ export const feed = createFeed({
 const atom1 = generateAtom1(feed);
 
 // JSON Feed 1.1
-const json = generateJson(feed);
+const json1 = generateJson1(feed);
 
 // RSS 2.0
 const rss2 = generateRss2(feed);
