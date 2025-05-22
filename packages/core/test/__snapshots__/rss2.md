@@ -11,7 +11,7 @@
     <category>Category Foo</category>
     <category domain="http://example.com/category">Category Bar</category>
     <docs>https://www.rssboard.org/rss-specification</docs>
-    <generator>https://example.com/generator</generator>
+    <generator>Generator 2.3.3 (https://example.com/generator)</generator>
     <language>en-US</language>
     <copyright>Copyright © 2025 KazariEX</copyright>
     <ttl>60</ttl>

@@ -1,7 +1,7 @@
 import { defaults } from "../feed";
 import { serialize } from "../serialize";
 import { createRoot, createRootAttributes, getFeedLink, toArray } from "./utils";
-import type { Author, Category, Enclosure, Feed, Generator } from "../types";
+import type { Author, Category, Enclosure, Feed } from "../types";
 
 export function generateRss2(feed: Feed) {
     const plugins = feed.plugins?.filter(({ type }) => type === "rss2") ?? [];
@@ -25,7 +25,7 @@ export function generateRss2(feed: Feed) {
                 lastBuildDate: feed.updatedAt?.toUTCString() ?? new Date().toUTCString(),
                 category: feed.categories?.map(transformCategory),
                 docs: feed.docs ?? "https://www.rssboard.org/rss-specification",
-                generator: feed.generator && transformGenerator(feed.generator),
+                generator: transformGenerator(feed.generator),
                 language: feed.language,
                 copyright: feed.copyright,
                 ttl: feed.ttl,
@@ -168,14 +168,20 @@ function transformCategory(category: Category) {
     };
 }
 
-function transformGenerator(generator: string | true | Generator) {
-    if (typeof generator === "string") {
-        return generator;
+function transformGenerator(generator: Feed["generator"]) {
+    if (typeof generator !== "object") {
+        return generator || void 0;
     }
-    else if (generator === true) {
-        generator = defaults.generator;
+
+    const { uri, version, text } = generator ?? defaults.generator;
+    let str = text;
+    if (version !== void 0) {
+        str += ` ${version}`;
     }
-    return generator.uri;
+    if (uri !== void 0) {
+        str += ` (${uri})`;
+    }
+    return str;
 }
 
 function transformEnclosure(enclosure: string | Enclosure, mimeCategory = "image") {

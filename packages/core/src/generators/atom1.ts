@@ -1,7 +1,7 @@
 import { defaults } from "../feed";
 import { serialize } from "../serialize";
 import { createRoot, createRootAttributes, getFeedLink, toArray } from "./utils";
-import type { Author, Category, Enclosure, Feed, Generator } from "../types";
+import type { Author, Category, Enclosure, Feed } from "../types";
 
 export function generateAtom1(feed: Feed) {
     const plugins = feed.plugins?.filter(({ type }) => type === "atom1") ?? [];
@@ -14,7 +14,7 @@ export function generateAtom1(feed: Feed) {
             subtitle: feed.description,
             id: feed.id,
             updated: feed.updatedAt?.toISOString() ?? new Date().toISOString(),
-            generator: feed.generator && transformGenerator(feed.generator),
+            generator: transformGenerator(feed.generator),
             logo: feed.image,
             icon: feed.favicon,
             rights: feed.copyright,
@@ -154,15 +154,12 @@ function transformCategory(category: Category) {
     };
 }
 
-function transformGenerator(generator: string | true | Generator) {
-    if (typeof generator === "string") {
-        return generator;
-    }
-    else if (generator === true) {
-        generator = defaults.generator;
+function transformGenerator(generator: Feed["generator"]) {
+    if (typeof generator !== "object") {
+        return generator || void 0;
     }
 
-    const { uri, version, text } = generator;
+    const { uri, version, text } = generator ?? defaults.generator;
     return {
         $uri: uri,
         $version: version,

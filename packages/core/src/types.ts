@@ -21,7 +21,7 @@ export interface Feed {
     hub?: string;
 
     language?: string;
-    generator?: string | true | Generator;
+    generator?: string | false | Generator;
     docs?: string;
     image?: string;
     favicon?: string;
