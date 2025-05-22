@@ -21,9 +21,9 @@ export const feed = createFeed({
 
     language: "en-US",
     generator: {
+        name: "Generator",
         uri: "https://example.com/generator",
         version: "2.3.3",
-        text: "Generator",
     },
     stylesheet: "http://example.com/stylesheet.xsl",
     image: "http://example.com/image.png",

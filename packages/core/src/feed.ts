@@ -3,9 +3,9 @@ import type { Feed, Generator } from "./types";
 
 export const defaults = {
     generator: {
+        name: "ZFeed",
         uri: `https://github.com/${packageJson.repository}`,
         version: packageJson.version,
-        text: "ZFeed",
     } satisfies Generator,
 };
 

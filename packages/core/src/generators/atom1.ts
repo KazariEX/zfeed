@@ -156,11 +156,11 @@ function transformGenerator(generator: Feed["generator"]) {
         return generator || void 0;
     }
 
-    const { uri, version, text } = generator ?? defaults.generator;
+    const { name, uri, version } = generator ?? defaults.generator;
     return {
         $uri: uri,
         $version: version,
-        "#text": text,
+        "#text": name,
     };
 }
 

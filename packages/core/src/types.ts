@@ -63,9 +63,9 @@ export interface Item {
 }
 
 export interface Generator {
+    name: string;
     uri?: string;
     version?: string;
-    text: string;
 }
 
 export interface Author {

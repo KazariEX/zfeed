@@ -173,8 +173,8 @@ function transformGenerator(generator: Feed["generator"]) {
         return generator || void 0;
     }
 
-    const { uri, version, text } = generator ?? defaults.generator;
-    let str = text;
+    const { name, uri, version } = generator ?? defaults.generator;
+    let str = name;
     if (version !== void 0) {
         str += ` ${version}`;
     }
