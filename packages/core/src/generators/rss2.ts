@@ -168,12 +168,12 @@ function transformCategory(category: Category) {
     };
 }
 
-function transformGenerator(generator: Feed["generator"]) {
+function transformGenerator(generator: Feed["generator"] = defaults.generator) {
     if (typeof generator !== "object") {
         return generator || void 0;
     }
 
-    const { name, uri, version } = generator ?? defaults.generator;
+    const { name, uri, version } = generator;
     let str = name;
     if (version !== void 0) {
         str += ` ${version}`;
