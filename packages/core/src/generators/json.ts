@@ -2,6 +2,8 @@ import { getFeedLink, toArray } from "./utils";
 import type { Author, Enclosure, Feed } from "../types";
 
 export function generateJson(feed: Feed) {
+    const plugins = feed.plugins?.filter(({ type }) => type === "json") ?? [];
+
     const data: any = {
         version: "https://jsonfeed.org/version/1.1",
         title: feed.title,
@@ -51,6 +53,10 @@ export function generateJson(feed: Feed) {
             }
         }
 
+        for (const plugin of plugins) {
+            plugin.resolveItem?.(item, entry);
+        }
+
         return entry;
     });
 
@@ -60,8 +66,8 @@ export function generateJson(feed: Feed) {
         }
     }
 
-    for (const plugin of feed.plugins ?? []) {
-        plugin.resolveJson?.(feed, data);
+    for (const plugin of plugins) {
+        plugin.resolve?.(feed, data);
     }
 
     return JSON.stringify(data, null, 2);

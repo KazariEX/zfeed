@@ -4,7 +4,7 @@ import { createRoot, createRootAttributes, getFeedLink, toArray } from "./utils"
 import type { Author, Category, Enclosure, Feed, Generator } from "../types";
 
 export function generateRss2(feed: Feed) {
-    let hasContent = false;
+    const plugins = feed.plugins?.filter(({ type }) => type === "rss2") ?? [];
 
     const xml = createRoot(feed, {
         rss: {
@@ -91,7 +91,6 @@ export function generateRss2(feed: Feed) {
          * @link https://www.rssboard.org/rss-profile#namespace-elements-content-encoded
          */
         if (item.content !== void 0) {
-            hasContent = true;
             entry["content:encoded"] = { "#cdata": item.content };
         }
 
@@ -127,6 +126,10 @@ export function generateRss2(feed: Feed) {
             }
         }
 
+        for (const plugin of plugins) {
+            plugin.resolveItem?.(item, entry);
+        }
+
         return entry;
     });
 
@@ -134,7 +137,7 @@ export function generateRss2(feed: Feed) {
         xml.rss["$xmlns:atom"] = "http://www.w3.org/2005/Atom";
     }
 
-    if (hasContent) {
+    if (feed.items?.some((item) => item.content !== void 0)) {
         xml.rss["$xmlns:content"] = "http://purl.org/rss/1.0/modules/content/";
     }
 
@@ -144,8 +147,8 @@ export function generateRss2(feed: Feed) {
         }
     }
 
-    for (const plugin of feed.plugins ?? []) {
-        plugin.resolveRss2?.(feed, xml);
+    for (const plugin of plugins) {
+        plugin.resolve?.(feed, xml);
     }
 
     return serialize("", xml);

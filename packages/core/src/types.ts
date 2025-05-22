@@ -94,7 +94,7 @@ export interface Plugin<T> {
 
 export interface PluginInstance {
     name: string;
-    resolveAtom1?: (feed: Feed, xml: any) => void;
-    resolveJson?: (feed: Feed, data: any) => void;
-    resolveRss2?: (feed: Feed, xml: any) => void;
+    type: "atom1" | "json" | "rss2";
+    resolve?: (feed: Feed, data: any) => void;
+    resolveItem?: (item: Item, data: any) => void;
 }

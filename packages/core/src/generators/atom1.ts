@@ -4,6 +4,8 @@ import { createRoot, createRootAttributes, getFeedLink, toArray } from "./utils"
 import type { Author, Category, Enclosure, Feed, Generator } from "../types";
 
 export function generateAtom1(feed: Feed) {
+    const plugins = feed.plugins?.filter(({ type }) => type === "atom1") ?? [];
+
     const xml = createRoot(feed, {
         feed: {
             ...createRootAttributes(feed, "http://www.w3.org/2005/Atom"),
@@ -112,6 +114,10 @@ export function generateAtom1(feed: Feed) {
             }
         }
 
+        for (const plugin of plugins) {
+            plugin.resolveItem?.(item, entry);
+        }
+
         return entry;
     });
 
@@ -121,8 +127,8 @@ export function generateAtom1(feed: Feed) {
         }
     }
 
-    for (const plugin of feed.plugins ?? []) {
-        plugin.resolveAtom1?.(feed, xml);
+    for (const plugin of plugins) {
+        plugin.resolve?.(feed, xml);
     }
 
     return serialize("", xml);
