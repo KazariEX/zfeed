@@ -13,8 +13,7 @@ export interface Feed {
     description?: string;
     id: string;
     link?: string;
-    feed?: string;
-    feedLinks?: {
+    feed?: string | {
         atom?: string;
         json?: string;
         rss?: string;

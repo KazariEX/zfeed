@@ -24,10 +24,10 @@ export const feed = createFeed({
   description: "This is my personnal feed!",
   id: "http://example.com/",
   link: "http://example.com/",
-  feed: "http://example.com/feed",
-  feedLinks: {
+  feed: {
     atom: "http://example.com/atom",
     json: "http://example.com/json",
+    rss: "http://example.com/rss",
   },
   language: "en-US",
   generator: "https://example.com/generator",

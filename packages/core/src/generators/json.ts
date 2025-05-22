@@ -1,4 +1,4 @@
-import { toArray } from "./utils";
+import { getFeedLink, toArray } from "./utils";
 import type { Author, Enclosure, Feed } from "../types";
 
 export function generateJson(feed: Feed) {
@@ -6,7 +6,7 @@ export function generateJson(feed: Feed) {
         version: "https://jsonfeed.org/version/1.1",
         title: feed.title,
         home_page_url: feed.link,
-        feed_url: feed.feed ?? feed.feedLinks?.json,
+        feed_url: getFeedLink(feed, "json"),
         description: feed.description,
         icon: feed.image,
         favicon: feed.favicon,

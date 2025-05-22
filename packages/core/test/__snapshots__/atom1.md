@@ -11,7 +11,7 @@
   <icon>http://example.com/image.ico</icon>
   <rights>Copyright © 2025 KazariEX</rights>
   <link rel="alternate" href="http://example.com/"/>
-  <link rel="self" href="http://example.com/feed"/>
+  <link rel="self" href="http://example.com/atom"/>
   <link rel="hub" href="wss://example.com/hub"/>
   <author>
     <name>KazariEX</name>

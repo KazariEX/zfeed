@@ -3,7 +3,7 @@
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Feed Title",
   "home_page_url": "http://example.com/",
-  "feed_url": "http://example.com/feed",
+  "feed_url": "http://example.com/json",
   "description": "This is my personnal feed!",
   "icon": "http://example.com/image.png",
   "favicon": "http://example.com/image.ico",

@@ -1,6 +1,6 @@
 import { defaults } from "../feed";
 import { serialize } from "../serialize";
-import { createRoot, createRootAttributes, toArray } from "./utils";
+import { createRoot, createRootAttributes, getFeedLink, toArray } from "./utils";
 import type { Author, Category, Enclosure, Feed, Generator } from "../types";
 
 export function generateAtom1(feed: Feed) {
@@ -30,7 +30,7 @@ export function generateAtom1(feed: Feed) {
     }
 
     // link (rel="self")
-    const atomLink = feed.feed ?? feed.feedLinks?.atom;
+    const atomLink = getFeedLink(feed, "atom");
     if (atomLink !== void 0) {
         xml.feed.link.push({
             $rel: "self",

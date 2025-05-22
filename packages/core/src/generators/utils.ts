@@ -34,6 +34,10 @@ export function createRootAttributes(feed: Feed, defaultNamespaceUrl?: string) {
     return attributes;
 }
 
+export function getFeedLink({ feed }: Feed, key: "atom" | "json" | "rss") {
+    return typeof feed === "string" ? feed : feed?.[key];
+}
+
 export function toArray<T>(data: T | T[] | undefined) {
     return data !== void 0 ? Array.isArray(data) ? data : [data] : [];
 }

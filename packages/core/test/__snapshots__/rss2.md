@@ -20,7 +20,7 @@
       <url>http://example.com/image.png</url>
       <link>http://example.com/</link>
     </image>
-    <atom:link href="http://example.com/feed" rel="self" type="application/rss+xml"/>
+    <atom:link href="http://example.com/rss" rel="self" type="application/rss+xml"/>
     <atom:link href="wss://example.com/hub" rel="hub"/>
     <item>
       <title>Hello World</title>

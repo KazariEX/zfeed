@@ -1,6 +1,6 @@
 import { defaults } from "../feed";
 import { serialize } from "../serialize";
-import { createRoot, createRootAttributes, toArray } from "./utils";
+import { createRoot, createRootAttributes, getFeedLink, toArray } from "./utils";
 import type { Author, Category, Enclosure, Feed, Generator } from "../types";
 
 export function generateRss2(feed: Feed) {
@@ -47,7 +47,7 @@ export function generateRss2(feed: Feed) {
     const atomLinks: any[] = xml.rss.channel["atom:link"] = [];
 
     // atom:link (rel="self")
-    const atomLink = feed.feed ?? feed.feedLinks?.rss;
+    const atomLink = getFeedLink(feed, "rss");
     if (atomLink !== void 0) {
         atomLinks.push({
             $href: atomLink,
