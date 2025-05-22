@@ -107,7 +107,7 @@ const json = generateJson(feed);
 const rss2 = generateRss2(feed);
 ```
 
-## Plugins
+## Plugin System
 
 ZFeed has a simple plugin system to extend the functionality of the feed.
 
@@ -142,6 +142,6 @@ const feed = createFeed({
 });
 ```
 
-### Built-in plugins
+### Builtin plugins
 
 - [@zfeed/plugin-podcast](/packages/plugin-podcast): Adds podcast support.
