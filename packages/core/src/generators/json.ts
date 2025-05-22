@@ -60,6 +60,10 @@ export function generateJson(feed: Feed) {
         }
     }
 
+    for (const plugin of feed.plugins ?? []) {
+        plugin.resolveJson?.(feed, data);
+    }
+
     return JSON.stringify(data, null, 2);
 }
 

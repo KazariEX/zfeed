@@ -69,6 +69,12 @@ importers:
         specifier: 'catalog:'
         version: 3.6.6
 
+  packages/plugin-podcast:
+    dependencies:
+      zfeed:
+        specifier: 'workspace:'
+        version: link:../core
+
 packages:
 
   '@antfu/eslint-config@4.13.2':

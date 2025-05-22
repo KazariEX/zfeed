@@ -119,6 +119,10 @@ export function generateAtom1(feed: Feed) {
         }
     }
 
+    for (const plugin of feed.plugins ?? []) {
+        plugin.resolveAtom1?.(feed, xml);
+    }
+
     return serialize("", xml);
 }
 

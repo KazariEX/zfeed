@@ -182,6 +182,10 @@ export function generateRss2(feed: Feed) {
         }
     }
 
+    for (const plugin of feed.plugins ?? []) {
+        plugin.resolveRss2?.(feed, xml);
+    }
+
     return serialize("", xml);
 }
 

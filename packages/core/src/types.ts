@@ -37,7 +37,9 @@ export interface Feed {
     contributors?: Author[];
     categories?: Category[];
     items?: Item[];
+
     extends?: Record<string, any>;
+    plugins?: PluginInstance[];
 }
 
 export interface Item {
@@ -88,4 +90,15 @@ export interface Enclosure {
     length?: number;
     title?: string;
     duration?: number;
+}
+
+export interface Plugin<T> {
+    (options?: T): PluginInstance;
+}
+
+export interface PluginInstance {
+    name: string;
+    resolveAtom1?: (feed: Feed, xml: any) => void;
+    resolveJson?: (feed: Feed, data: any) => void;
+    resolveRss2?: (feed: Feed, xml: any) => void;
 }
