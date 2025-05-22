@@ -106,3 +106,42 @@ const json = generateJson(feed);
 // RSS 2.0
 const rss2 = generateRss2(feed);
 ```
+
+## Plugins
+
+ZFeed has a simple plugin system to extend the functionality of the feed.
+
+First, define a plugin:
+
+```ts
+import { definePlugin } from "zfeed";
+
+export default definePlugin(() => {
+  return {
+    name: "zfeed-plugin-testify",
+    type: "rss2",
+    resolve(feed, data) {
+      data.rss["$xmlns:testify"] = "http://testify.com/schemas/1.0";
+      data.rss.channel["testify:image"] = { $href: feed.image };
+    }
+  }
+});
+```
+
+Then you can use the plugin in your feed:
+
+```ts
+import { createFeed } from "zfeed";
+import testify from "zfeed-plugin-testify";
+
+const feed = createFeed({
+  /* general options */
+  plugins: [
+    testify(),
+  ],
+});
+```
+
+### Built-in plugins
+
+- [@zfeed/plugin-podcast](/packages/plugin-podcast): Adds podcast support.
