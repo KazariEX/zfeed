@@ -144,38 +144,6 @@ export function generateRss2(feed: Feed) {
         xml.rss["$xmlns:content"] = "http://purl.org/rss/1.0/modules/content/";
     }
 
-    /**
-     * @link https://podcast-standard.org/podcast_standard
-     */
-    if (feed.podcast) {
-        xml.rss["$xmlns:googleplay"] = "http://www.google.com/schemas/play-podcasts/1.0";
-        xml.rss["$xmlns:itunes"] = "http://www.itunes.com/dtds/podcast-1.0.dtd";
-
-        const author = toArray(feed.author)[0];
-
-        if (author?.name !== void 0) {
-            xml.rss.channel["googleplay:author"] = author.name;
-            xml.rss.channel["itunes:author"] = author.name;
-        }
-
-        if (author?.email !== void 0) {
-            xml.rss.channel["googleplay:owner"] = author.email;
-            xml.rss.channel["itunes:owner"] = {
-                "itunes:email": author.email,
-            };
-        }
-
-        if (feed.categories !== void 0) {
-            xml.rss.channel["googleplay:category"] = feed.categories.map(({ term }) => ({ $text: term }));
-            xml.rss.channel["itunes:category"] = feed.categories.map(({ term }) => ({ $text: term }));
-        }
-
-        if (feed.image !== void 0) {
-            xml.rss.channel["googleplay:image"] = { $href: feed.image };
-            xml.rss.channel["itunes:image"] = { $href: feed.image };
-        }
-    }
-
     if (feed.extends) {
         for (const [key, value] of Object.entries(feed.extends)) {
             xml.rss.channel[key] = value;

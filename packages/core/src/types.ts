@@ -31,8 +31,6 @@ export interface Feed {
     publishedAt?: Date;
     ttl?: number;
 
-    podcast?: boolean;
-
     author?: Author | Author[];
     contributors?: Author[];
     categories?: Category[];
