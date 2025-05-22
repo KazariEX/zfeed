@@ -24,7 +24,7 @@ export function generateRss2(feed: Feed) {
                 pubDate: feed.publishedAt?.toUTCString(),
                 lastBuildDate: feed.updatedAt?.toUTCString() ?? new Date().toUTCString(),
                 category: feed.categories?.map(transformCategory),
-                docs: feed.docs ?? "https://validator.w3.org/feed/docs/rss2.html",
+                docs: feed.docs ?? "https://www.rssboard.org/rss-specification",
                 generator: feed.generator && transformGenerator(feed.generator),
                 language: feed.language,
                 copyright: feed.copyright,

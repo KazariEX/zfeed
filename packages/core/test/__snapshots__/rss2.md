@@ -10,7 +10,7 @@
     <lastBuildDate>Mon, 30 Sep 2019 11:45:14 GMT</lastBuildDate>
     <category>Category Foo</category>
     <category domain="http://example.com/category">Category Bar</category>
-    <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <docs>https://www.rssboard.org/rss-specification</docs>
     <generator>https://example.com/generator</generator>
     <language>en-US</language>
     <copyright>Copyright © 2025 KazariEX</copyright>
