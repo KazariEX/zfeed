@@ -16,12 +16,12 @@
     <copyright>Copyright © 2025 KazariEX</copyright>
     <ttl>60</ttl>
     <image>
-      <title>Feed Title</title>
       <url>http://example.com/image.png</url>
+      <title>Feed Title</title>
       <link>http://example.com/</link>
     </image>
-    <atom:link href="http://example.com/rss" rel="self" type="application/rss+xml"/>
-    <atom:link href="wss://example.com/hub" rel="hub"/>
+    <atom:link rel="self" href="http://example.com/rss" type="application/rss+xml"/>
+    <atom:link rel="hub" href="wss://example.com/hub"/>
     <item>
       <title>Hello World</title>
       <guid isPermaLink="false">https://example.com/hello-world?id=this&amp;that=true</guid>
@@ -34,19 +34,19 @@
       <author>mimori@example.com (Mimori)</author>
       <author>yamabuki@example.com (Yamabuki)</author>
       <enclosure url="https://example.com/hello-world.jpg" length="0" type="image/jpg"/>
-      <extend:1>
-        <about>just an extend item example</about>
-        <dummy>example</dummy>
-      </extend:1>
-      <extend:2>
-        <about>just a second extend item example</about>
-        <dummy>example</dummy>
-      </extend:2>
+      <extend:foo>
+        <about>just an extend item foo</about>
+        <dummy>foo</dummy>
+      </extend:foo>
+      <extend:bar>
+        <about>just an extend item bar</about>
+        <dummy>bar</dummy>
+      </extend:bar>
     </item>
-    <extend>
-      <about>just an extend example</about>
-      <dummy>example</dummy>
-    </extend>
+    <extend:baz>
+      <about>just an extend item baz</about>
+      <dummy>baz</dummy>
+    </extend:baz>
   </channel>
 </rss>
 ```

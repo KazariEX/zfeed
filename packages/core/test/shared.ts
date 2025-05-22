@@ -113,22 +113,22 @@ export const feed = createFeed({
             },
             image: "https://example.com/hello-world.jpg",
             extends: {
-                "extend:1": {
-                    about: "just an extend item example",
-                    dummy: "example",
+                "extend:foo": {
+                    about: "just an extend item foo",
+                    dummy: "foo",
                 },
-                "extend:2": {
-                    about: "just a second extend item example",
-                    dummy: "example",
+                "extend:bar": {
+                    about: "just an extend item bar",
+                    dummy: "bar",
                 },
             },
         },
     ],
 
     extends: {
-        extend: {
-            about: "just an extend example",
-            dummy: "example",
+        "extend:baz": {
+            about: "just an extend item baz",
+            dummy: "baz",
         },
     },
 });

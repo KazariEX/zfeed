@@ -12,14 +12,14 @@ export function generateRss2(feed: Feed) {
             ...createRootAttributes(feed),
             channel: {
                 /**
-                 * @link https://www.rssboard.org/rss-specification#requiredChannelElements
+                 * @see https://www.rssboard.org/rss-specification#requiredChannelElements
                  */
                 title: feed.title,
                 description: feed.description,
                 link: feed.link ?? feed.id,
 
                 /**
-                 * @link https://www.rssboard.org/rss-specification#optionalChannelElements
+                 * @see https://www.rssboard.org/rss-specification#optionalChannelElements
                  */
                 pubDate: feed.publishedAt?.toUTCString(),
                 lastBuildDate: feed.updatedAt?.toUTCString() ?? new Date().toUTCString(),
@@ -34,12 +34,12 @@ export function generateRss2(feed: Feed) {
     });
 
     /**
-     * @link https://www.rssboard.org/rss-specification#ltimagegtSubelementOfLtchannelgt
+     * @see https://www.rssboard.org/rss-specification#ltimagegtSubelementOfLtchannelgt
      */
     if (feed.image !== void 0) {
         xml.rss.channel.image = {
-            title: feed.title,
             url: feed.image,
+            title: feed.title,
             link: feed.link,
         };
     }
@@ -68,18 +68,18 @@ export function generateRss2(feed: Feed) {
         const entry: any = {
             title: item.title,
             /**
-             * @link https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt
+             * @see https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt
              */
             guid: item.id !== void 0 ? { $isPermaLink: "false", "#text": item.id } : item.link,
             link: item.link,
             /**
-             * @link https://www.rssboard.org/rss-specification#ltpubdategtSubelementOfLtitemgt
+             * @see https://www.rssboard.org/rss-specification#ltpubdategtSubelementOfLtitemgt
              */
             pubDate: item.publishedAt?.toUTCString() ?? item.updatedAt.toUTCString(),
         };
 
         /**
-         * @link https://www.rssboard.org/rss-specification#ltcategorygtSubelementOfLtitemgt
+         * @see https://www.rssboard.org/rss-specification#ltcategorygtSubelementOfLtitemgt
          */
         entry.category = item.categories?.map(transformCategory);
 
@@ -88,21 +88,21 @@ export function generateRss2(feed: Feed) {
         }
 
         /**
-         * @link https://www.rssboard.org/rss-profile#namespace-elements-content-encoded
+         * @see https://www.rssboard.org/rss-profile#namespace-elements-content-encoded
          */
         if (item.content !== void 0) {
             entry["content:encoded"] = { "#cdata": item.content };
         }
 
         /**
-         * @link https://www.rssboard.org/rss-specification#ltauthorgtSubelementOfLtitemgt
+         * @see https://www.rssboard.org/rss-specification#ltauthorgtSubelementOfLtitemgt
          */
         entry.author = toArray(item.author)
             .filter(({ email }) => email !== void 0)
             .map(transformAuthor);
 
         /**
-         * @link https://www.rssboard.org/rss-specification#ltenclosuregtSubelementOfLtitemgt
+         * @see https://www.rssboard.org/rss-specification#ltenclosuregtSubelementOfLtitemgt
          */
         if (item.enclosure) {
             entry.enclosure = transformEnclosure(item.enclosure);

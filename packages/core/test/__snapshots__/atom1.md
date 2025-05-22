@@ -11,7 +11,7 @@
   <icon>http://example.com/image.ico</icon>
   <rights>Copyright © 2025 KazariEX</rights>
   <link rel="alternate" href="http://example.com/"/>
-  <link rel="self" href="http://example.com/atom"/>
+  <link rel="self" href="http://example.com/atom" type="application/atom+xml"/>
   <link rel="hub" href="wss://example.com/hub"/>
   <author>
     <name>KazariEX</name>
@@ -60,18 +60,18 @@
       <email>moriya@example.com</email>
       <uri>https://example.com/moriya</uri>
     </contributor>
-    <extend:1>
-      <about>just an extend item example</about>
-      <dummy>example</dummy>
-    </extend:1>
-    <extend:2>
-      <about>just a second extend item example</about>
-      <dummy>example</dummy>
-    </extend:2>
+    <extend:foo>
+      <about>just an extend item foo</about>
+      <dummy>foo</dummy>
+    </extend:foo>
+    <extend:bar>
+      <about>just an extend item bar</about>
+      <dummy>bar</dummy>
+    </extend:bar>
   </entry>
-  <extend>
-    <about>just an extend example</about>
-    <dummy>example</dummy>
-  </extend>
+  <extend:baz>
+    <about>just an extend item baz</about>
+    <dummy>baz</dummy>
+  </extend:baz>
 </feed>
 ```
