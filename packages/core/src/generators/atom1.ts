@@ -60,6 +60,7 @@ export function generateAtom1(feed: Feed) {
             },
             id: item.id ?? item.link,
             link: [{
+                $rel: "alternate",
                 $href: item.link,
             }],
             updated: item.updatedAt.toISOString(),
