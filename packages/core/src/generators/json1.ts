@@ -28,23 +28,28 @@ export function generateJson1(feed: Feed) {
             date_modified: item.updatedAt?.toISOString(),
             authors: toArray(item.author).map(transformAuthor),
             tags: item.categories?.map(({ label }) => label),
-            attachments: [],
         };
 
+        const attachments = [];
+
         if (item.enclosure) {
-            entry.attachments.push(transformEnclosure(item.enclosure));
+            attachments.push(transformEnclosure(item.enclosure));
         }
 
         if (item.image !== void 0) {
-            entry.attachments.push(transformEnclosure(item.image, "image"));
+            attachments.push(transformEnclosure(item.image, "image"));
         }
 
         if (item.audio !== void 0) {
-            entry.attachments.push(transformEnclosure(item.audio, "audio"));
+            attachments.push(transformEnclosure(item.audio, "audio"));
         }
 
         if (item.video !== void 0) {
-            entry.attachments.push(transformEnclosure(item.video, "video"));
+            attachments.push(transformEnclosure(item.video, "video"));
+        }
+
+        if (attachments.length) {
+            entry.attachments = attachments;
         }
 
         if (item.extends) {
