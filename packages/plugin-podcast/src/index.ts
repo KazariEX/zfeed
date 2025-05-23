@@ -1,12 +1,6 @@
 import { definePlugin } from "zfeed";
 import * as packageJson from "../package.json";
 
-declare module "zfeed" {
-    interface Enclosure {
-        duration?: number;
-    }
-}
-
 /**
  * @see https://podcast-standard.org/podcast_standard
  */
