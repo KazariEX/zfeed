@@ -1,7 +1,7 @@
 {
   "name": "@zfeed/plugin-podcast",
   "type": "module",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": "KazariEX",
   "license": "MIT",
   "repository": "KazariEX/zfeed",
