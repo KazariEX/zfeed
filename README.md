@@ -123,8 +123,8 @@ export default definePlugin(() => {
     resolve(feed, data) {
       data.rss["$xmlns:testify"] = "http://testify.com/schemas/1.0";
       data.rss.channel["testify:image"] = { $href: feed.image };
-    }
-  }
+    },
+  };
 });
 ```
 

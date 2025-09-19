@@ -4,16 +4,15 @@ packages:
   - packages/*
 
 catalog:
-  "@antfu/eslint-config": ^4.13.3
-  "@zinkawaii/eslint-config": ^0.3.0
-  "@zinkawaii/scripts": ^0.0.2
+  "@zinkawaii/eslint-config": ^0.4.1
+  "@zinkawaii/scripts": ^0.0.3
   "@zinkawaii/tsconfig": ^0.0.2
-  bumpp: ^10.1.1
-  eslint: ^9.28.0
-  tsdown: ^0.12.7
-  vitest: ^3.2.1
-  xml-formatter: ^3.6.6
+  bumpp: ^10.2.3
+  eslint: ^9.35.0
+  tsdown: ^0.15.2
+  vitest: ^3.2.4
+  xml-formatter: ^3.6.7
 
 onlyBuiltDependencies:
   - esbuild
-  - unrs-resolver
+  - rolldown

@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.11.1",
+  "packageManager": "pnpm@10.17.0",
   "scripts": {
     "build": "pnpm -r build",
     "dev": "pnpm -r --parallel dev",
@@ -10,7 +10,6 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "catalog:",
     "@zinkawaii/eslint-config": "catalog:",
     "@zinkawaii/scripts": "catalog:",
     "@zinkawaii/tsconfig": "catalog:",
