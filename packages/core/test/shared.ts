@@ -91,7 +91,7 @@ export const feed = createFeed({
                     link: "https://example.com/yamabuki",
                 },
                 {
-                    name: "Yamabuki, Name Only",
+                    name: "Tokiori",
                 },
             ],
             contributors: [

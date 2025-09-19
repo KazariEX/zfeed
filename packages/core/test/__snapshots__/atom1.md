@@ -48,7 +48,7 @@
       <uri>https://example.com/yamabuki</uri>
     </author>
     <author>
-      <name>Yamabuki, Name Only</name>
+      <name>Tokiori</name>
     </author>
     <contributor>
       <name>Kumoyo</name>

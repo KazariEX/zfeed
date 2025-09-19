@@ -34,7 +34,7 @@
           "url": "https://example.com/yamabuki"
         },
         {
-          "name": "Yamabuki, Name Only"
+          "name": "Tokiori"
         }
       ],
       "tags": [

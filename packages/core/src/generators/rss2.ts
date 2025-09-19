@@ -1,10 +1,11 @@
 import { defaults } from "../feed";
 import { serialize } from "../serialize";
 import { createRoot, createRootAttributes, getFeedLink, toArray } from "./utils";
-import type { Author, Category, Enclosure, Feed } from "../types";
+import type { Category, Enclosure, Feed } from "../types";
 
 export function generateRss2(feed: Feed) {
     const plugins = feed.plugins?.filter(({ type }) => type === "rss2") ?? [];
+    const namespace: Record<string, boolean> = {};
 
     const xml = createRoot(feed, {
         rss: {
@@ -44,6 +45,9 @@ export function generateRss2(feed: Feed) {
         };
     }
 
+    /**
+     * @see https://www.rssboard.org/rss-profile#namespace-elements-atom-link
+     */
     const atomLinks: any[] = xml.rss.channel["atom:link"] = [];
 
     // atom:link (rel="self")
@@ -92,14 +96,22 @@ export function generateRss2(feed: Feed) {
          */
         if (item.content !== void 0) {
             entry["content:encoded"] = { "#cdata": item.content };
+            namespace.content = true;
         }
 
         /**
          * @see https://www.rssboard.org/rss-specification#ltauthorgtSubelementOfLtitemgt
+         * @see https://www.rssboard.org/rss-profile#namespace-elements-dublin-creator
          */
-        entry.author = toArray(item.author)
-            .filter(({ email }) => email !== void 0)
-            .map(transformAuthor);
+        for (const { name, email } of toArray(item.author)) {
+            if (email !== void 0) {
+                (entry.author ??= []).push(name ? `${email} (${name})` : email);
+            }
+            else if (name !== void 0) {
+                (entry["dc:creator"] ??= []).push(name);
+                namespace.dc = true;
+            }
+        }
 
         /**
          * @see https://www.rssboard.org/rss-specification#ltenclosuregtSubelementOfLtitemgt
@@ -136,9 +148,11 @@ export function generateRss2(feed: Feed) {
     if (atomLinks.length) {
         xml.rss["$xmlns:atom"] = "http://www.w3.org/2005/Atom";
     }
-
-    if (feed.items?.some((item) => item.content !== void 0)) {
+    if (namespace.content) {
         xml.rss["$xmlns:content"] = "http://purl.org/rss/1.0/modules/content/";
+    }
+    if (namespace.dc) {
+        xml.rss["$xmlns:dc"] = "http://purl.org/dc/elements/1.1/";
     }
 
     if (feed.extends) {
@@ -152,11 +166,6 @@ export function generateRss2(feed: Feed) {
     }
 
     return serialize("", xml);
-}
-
-function transformAuthor(author: Author) {
-    const { name, email } = author;
-    return `${email} (${name})`;
 }
 
 function transformCategory(category: Category) {
